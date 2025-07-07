@@ -1,8 +1,11 @@
 import React from 'react'
+import BannerSlider from '../components/BannerSlider'
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+        <BannerSlider></BannerSlider>
+    </div>
   )
 }
 
