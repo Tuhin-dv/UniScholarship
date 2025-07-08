@@ -1,9 +1,22 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { AuthContext } from "../context/AuthContext/AuthContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        console.log("Logged out");
+        // Optional: show toast
+      })
+      .catch((error) => {
+        console.error("Logout error", error);
+      });
+  };
 
   const navLinks = (
     <>
@@ -17,11 +30,22 @@ const Navbar = () => {
           All Scholarships
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/login" onClick={() => setMenuOpen(false)}>
-          Login
-        </NavLink>
-      </li>
+
+      {!user && (
+        <li>
+          <NavLink to="/login" onClick={() => setMenuOpen(false)}>
+            Login
+          </NavLink>
+        </li>
+      )}
+
+      {user && (
+        <li>
+          <button onClick={handleLogout} className="text-left w-full px-2 py-1 text-red-600 hover:underline">
+            Log Out
+          </button>
+        </li>
+      )}
     </>
   );
 
@@ -49,9 +73,7 @@ const Navbar = () => {
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 shadow-md">
-          <ul className="flex flex-col gap-4 p-4">
-            {navLinks}
-          </ul>
+          <ul className="flex flex-col gap-4 p-4">{navLinks}</ul>
         </div>
       )}
     </div>

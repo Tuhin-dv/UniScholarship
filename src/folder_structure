@@ -1,0 +1,84 @@
+// client/
+// │
+// ├── public/
+// │   └── vite.svg
+// │
+// ├── src/
+// │   ├── assets/
+// │   │   ├── logo.png
+// │   │   └── banner1.jpg
+// │
+// │   ├── components/
+// │   │   ├── Navbar.jsx
+// │   │   ├── Footer.jsx
+// │   │   ├── BannerSlider.jsx
+// │   │   ├── ScholarshipCard.jsx
+// │   │   ├── ReviewCard.jsx
+// │   │   └── PrivateRoute.jsx
+// │
+// │   ├── layouts/
+// │   │   ├── MainLayout.jsx
+// │   │   └── DashboardLayout.jsx
+// │
+// │   ├── pages/
+// │   │   ├── Home/
+// │   │   │   └── Home.jsx
+// │   │   ├── AllScholarships/
+// │   │   │   └── AllScholarships.jsx
+// │   │   ├── ScholarshipDetails/
+// │   │   │   └── ScholarshipDetails.jsx
+// │   │   ├── Login/
+// │   │   │   └── Login.jsx
+// │   │   ├── Register/
+// │   │   │   └── Register.jsx
+// │   │   ├── NotFound/
+// │   │   │   └── NotFound.jsx
+// │   │   └── Dashboard/
+// │   │       ├── User/
+// │   │       │   ├── MyProfile.jsx
+// │   │       │   ├── MyApplications.jsx
+// │   │       │   └── MyReviews.jsx
+// │   │       ├── Moderator/
+// │   │       │   ├── AddScholarship.jsx
+// │   │       │   ├── ManageScholarships.jsx
+// │   │       │   ├── AllReviews.jsx
+// │   │       │   └── AllApplications.jsx
+// │   │       └── Admin/
+// │   │           ├── AddScholarship.jsx
+// │   │           ├── ManageUsers.jsx
+// │   │           ├── ManageScholarships.jsx
+// │   │           ├── ManageApplications.jsx
+// │   │           ├── ManageReviews.jsx
+// │   │           └── AnalyticsChart.jsx
+// │
+// │   ├── routes/
+// │   │   └── Routes.jsx
+// │
+// │   ├── context/
+// │   │   └── AuthProvider.jsx
+// │
+// │   ├── hooks/
+// │   │   └── useAuth.js
+// │
+// │   ├── services/
+// │   │   ├── api.js              # axios base instance
+// │   │   ├── scholarshipApi.js   # GET, POST, PUT, DELETE
+// │   │   ├── userApi.js
+// │   │   └── paymentApi.js
+// │
+// │   ├── utils/
+// │   │   ├── dateFormatter.js
+// │   │   └── toastAlert.js
+// │
+// │   ├── constants/
+// │   │   ├── roles.js
+// │   │   └── routes.js
+// │
+// │   ├── App.jsx
+// │   ├── main.jsx
+// │   └── index.css
+// │
+// ├── .env
+// ├── .gitignore
+// ├── package.json
+// ├── vite.config.js
