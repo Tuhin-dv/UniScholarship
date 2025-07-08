@@ -5,6 +5,9 @@ import AllScholarships from '../pages/AllScholarships/AllScholarships';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import AuthLayout from '../layouts/AuthLayout';
+import PrivateRoute from '../components/PrivateRoute';
+import ScholarshipDetails from '../pages/ScholarshipDetails/ScholarshipDetails';
+
 
 
 export const router = createBrowserRouter([
@@ -20,6 +23,13 @@ export const router = createBrowserRouter([
         path: '/all-scholarships',
         Component: AllScholarships
       },
+      {
+        path: '/scholarship/:id',
+        element: <PrivateRoute>
+          <ScholarshipDetails></ScholarshipDetails>
+        </PrivateRoute> // Your details page component
+      }
+
 
     ]
   },

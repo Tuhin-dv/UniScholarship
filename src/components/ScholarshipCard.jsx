@@ -1,5 +1,6 @@
-// src/components/ScholarshipCard.jsx
+
 import React from 'react';
+import { Link } from 'react-router';
 
 const ScholarshipCard = ({ scholarship }) => {
   const {
@@ -11,6 +12,7 @@ const ScholarshipCard = ({ scholarship }) => {
     subjectCategory,
     applicationFees,
     rating,
+    _id
   } = scholarship;
 
   return (
@@ -28,9 +30,12 @@ const ScholarshipCard = ({ scholarship }) => {
         <p className="text-sm text-gray-600"><strong>Fees:</strong> ${applicationFees}</p>
         <p className="text-sm text-gray-600"><strong>Deadline:</strong> {deadline}</p>
         <p className="text-sm text-gray-600"><strong>Rating:</strong> ⭐ {rating}</p>
-        <button className="mt-4 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-md hover:from-purple-700 hover:to-blue-700 transition">
+         <Link
+          to={`/scholarship/${_id}`}
+          className="mt-4 inline-block px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-md hover:from-purple-700 hover:to-blue-700 transition"
+        >
           View Details
-        </button>
+        </Link>
       </div>
     </div>
   );
