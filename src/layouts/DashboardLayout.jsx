@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { FaUser, FaPlusCircle, FaListUl, FaClipboardList, FaStar, FaArrowLeft } from 'react-icons/fa';
+import { FiFolder } from "react-icons/fi";
 
 const DashboardLayout = () => {
   return (
@@ -36,7 +37,7 @@ const DashboardLayout = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-72 min-h-full bg-base-100 text-base-content space-y-2">
           <h2 className="text-xl font-bold mb-4">Moderator Panel</h2>
-
+          {/* moderetor ROUTE-------------------------------- */}
           <li>
             <NavLink to="/dashboard/my-profile">
               <FaUser /> My Profile
@@ -60,6 +61,12 @@ const DashboardLayout = () => {
           <li>
             <NavLink to="/dashboard/all-reviews">
               <FaStar /> All Reviews
+            </NavLink>
+          </li>
+          {/* USER ROUTE ---------------------------------------------------------- */}
+          <li>
+            <NavLink to='my-application'>
+              <FiFolder className="inline mr-2" />   My Application
             </NavLink>
           </li>
           <li className="pt-4 border-t border-gray-300">

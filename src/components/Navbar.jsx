@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaGraduationCap, FaTimes } from "react-icons/fa";
 import { AuthContext } from "../context/AuthContext/AuthContext";
 
 const Navbar = () => {
@@ -58,9 +58,10 @@ const Navbar = () => {
     <div className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
         {/* Logo */}
-        <NavLink to="/" className="text-xl font-bold text-purple-700">
-          UniScholar
-        </NavLink>
+        <Link to="/" className="flex items-center space-x-2 text-purple-700 font-extrabold text-2xl hover:text-purple-900 transition">
+          <FaGraduationCap size={28} />
+          <span>UniScholar</span>
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-6 items-center text-gray-700 font-medium">

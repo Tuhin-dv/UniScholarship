@@ -14,6 +14,8 @@ import ManageScholarships from '../pages/Dashboard/Moderator/ManageScholarships'
 import MyProfile from '../pages/Dashboard/Moderator/MyProfile';
 import AllReviews from '../pages/Dashboard/Moderator/AllReviews';
 import ScholarshipApply from '../pages/Dashboard/Moderator/User/ScholarshipApply';
+import MyApplications from '../pages/Dashboard/Moderator/User/MyApplications';
+import DashboardHome from '../pages/Dashboard/DashboardHome';
 
 
 
@@ -58,6 +60,10 @@ export const router = createBrowserRouter([
     path: '/dashboard',
     Component: DashboardLayout,
     children: [
+      {
+       index: true,
+       Component: DashboardHome
+      },
       //Moderator route
       {
         path: 'add-scholarship',
@@ -83,6 +89,10 @@ export const router = createBrowserRouter([
       {
         path: 'apply/:id',
         element: <ScholarshipApply />
+      },
+      {
+        path: 'my-application',
+        Component: MyApplications
       }
 
     ]
