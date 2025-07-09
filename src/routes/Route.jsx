@@ -13,6 +13,7 @@ import AllAppliedScholarships from '../pages/Dashboard/Moderator/AllAppliedSchol
 import ManageScholarships from '../pages/Dashboard/Moderator/ManageScholarships';
 import MyProfile from '../pages/Dashboard/Moderator/MyProfile';
 import AllReviews from '../pages/Dashboard/Moderator/AllReviews';
+import ScholarshipApply from '../pages/Dashboard/Moderator/User/ScholarshipApply';
 
 
 
@@ -56,28 +57,34 @@ export const router = createBrowserRouter([
   {
     path: '/dashboard',
     Component: DashboardLayout,
-    children:[
+    children: [
       //Moderator route
       {
-       path: 'add-scholarship',
-       Component: AddScholarship
+        path: 'add-scholarship',
+        Component: AddScholarship
       },
       {
-       path: 'all-applied',
-       Component: AllAppliedScholarships
+        path: 'all-applied',
+        Component: AllAppliedScholarships
       },
       {
-       path: 'manage-scholarships',
-       Component: ManageScholarships
+        path: 'manage-scholarships',
+        Component: ManageScholarships
       },
       {
-       path: 'my-profile',
-       Component: MyProfile
+        path: 'my-profile',
+        Component: MyProfile
       },
       {
-       path: 'all-reviews',
-       Component: AllReviews
+        path: 'all-reviews',
+        Component: AllReviews
+      },
+      //user route ----------------------------------
+      {
+        path: 'apply/:id',
+        element: <ScholarshipApply />
       }
+
     ]
   }
 ]);
