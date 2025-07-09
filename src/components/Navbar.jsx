@@ -30,6 +30,11 @@ const Navbar = () => {
           All Scholarships
         </NavLink>
       </li>
+      <li>
+        <NavLink to="/dashboard" onClick={() => setMenuOpen(false)}>
+          Dashboard
+        </NavLink>
+      </li>
 
       {!user && (
         <li>
