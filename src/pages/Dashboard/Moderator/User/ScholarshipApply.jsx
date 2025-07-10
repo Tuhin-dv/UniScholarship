@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
@@ -9,7 +9,7 @@ const ScholarshipApply = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
-
+ const navigate = useNavigate()
   // Fetch scholarship detail by id
   const {
     data: scholarship,
@@ -117,9 +117,11 @@ const ScholarshipApply = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePayment = () => {
-    setIsPaid(true);
-    toast.success("Payment successful! Now submit your application.");
+  const handlePayment = (id) => {
+     console.log(id)
+
+     navigate(`/dashboard/payment/${id}`)
+    // toast.success("Payment successful! Now submit your application.");
   };
 
   const handleSubmit = async (e) => {
@@ -301,23 +303,28 @@ const ScholarshipApply = () => {
                 </div>
               </div>
 
-              <button
-                onClick={handlePayment}
-                className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-4 px-6 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center space-x-3"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span>Pay ${scholarship.applicationFees} to Apply</span>
-              </button>
+              <div>
+                <p className="text-black"></p>
+             
+                  <button
+                    onClick={()=>handlePayment(id)}
+                    className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-4 px-6 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center space-x-3"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>Pay {scholarship.applicationFees} to Apply</span>
+                  </button>
+             
+              </div>
             </div>
           )}
 
@@ -396,11 +403,10 @@ const ScholarshipApply = () => {
                       onChange={handleChange}
                       placeholder="Enter your phone number"
                       disabled={!isPaid}
-                      className={`w-full px-4 text-black py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${
-                        !isPaid
-                          ? "bg-gray-100 border-gray-200 text-black cursor-not-allowed"
-                          : "border-gray-200 focus:border-purple-500 bg-white"
-                      }`}
+                      className={`w-full px-4 text-black py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${!isPaid
+                        ? "bg-gray-100 border-gray-200 text-black cursor-not-allowed"
+                        : "border-gray-200 focus:border-purple-500 bg-white"
+                        }`}
                     />
                   </div>
 
@@ -426,11 +432,10 @@ const ScholarshipApply = () => {
                       value={formData.gender}
                       onChange={handleChange}
                       disabled={!isPaid}
-                      className={`w-full text-black px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${
-                        !isPaid
-                          ? "bg-gray-100 border-gray-200 text-black cursor-not-allowed"
-                          : "border-gray-200 focus:border-purple-500 bg-white"
-                      }`}
+                      className={`w-full text-black px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${!isPaid
+                        ? "bg-gray-100 border-gray-200 text-black cursor-not-allowed"
+                        : "border-gray-200 focus:border-purple-500 bg-white"
+                        }`}
                     >
                       <option value="">Select Gender</option>
                       <option value="Male">Male</option>
@@ -464,11 +469,10 @@ const ScholarshipApply = () => {
                     onChange={handleChange}
                     placeholder="Paste your photo URL here"
                     disabled={!isPaid}
-                    className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${
-                      !isPaid
-                        ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
-                        : "border-gray-200 focus:border-purple-500 bg-white"
-                    }`}
+                    className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${!isPaid
+                      ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
+                      : "border-gray-200 focus:border-purple-500 bg-white"
+                      }`}
                   />
                 </div>
 
@@ -496,11 +500,10 @@ const ScholarshipApply = () => {
                     placeholder="Village, District, Country"
                     rows="3"
                     disabled={!isPaid}
-                    className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 resize-none ${
-                      !isPaid
-                        ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
-                        : "border-gray-200 focus:border-purple-500 bg-white"
-                    }`}
+                    className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 resize-none ${!isPaid
+                      ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
+                      : "border-gray-200 focus:border-purple-500 bg-white"
+                      }`}
                   />
                 </div>
               </div>
@@ -535,11 +538,10 @@ const ScholarshipApply = () => {
                       value={formData.degree}
                       onChange={handleChange}
                       disabled={!isPaid}
-                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${
-                        !isPaid
-                          ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
-                          : "border-gray-200 focus:border-blue-500 bg-white"
-                      }`}
+                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${!isPaid
+                        ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
+                        : "border-gray-200 focus:border-blue-500 bg-white"
+                        }`}
                     >
                       <option value="">Select Degree</option>
                       <option value="Diploma">Diploma</option>
@@ -569,11 +571,10 @@ const ScholarshipApply = () => {
                       value={formData.studyGap}
                       onChange={handleChange}
                       disabled={!isPaid}
-                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${
-                        !isPaid
-                          ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
-                          : "border-gray-200 focus:border-blue-500 bg-white"
-                      }`}
+                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${!isPaid
+                        ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
+                        : "border-gray-200 focus:border-blue-500 bg-white"
+                        }`}
                     >
                       <option value="No">No Study Gap</option>
                       <option value="Yes">Yes, I have study gap</option>
@@ -606,11 +607,10 @@ const ScholarshipApply = () => {
                       onChange={handleChange}
                       placeholder="e.g., 5.00 or A+"
                       disabled={!isPaid}
-                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${
-                        !isPaid
-                          ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
-                          : "border-gray-200 focus:border-green-500 bg-white"
-                      }`}
+                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${!isPaid
+                        ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
+                        : "border-gray-200 focus:border-green-500 bg-white"
+                        }`}
                     />
                   </div>
 
@@ -638,11 +638,10 @@ const ScholarshipApply = () => {
                       onChange={handleChange}
                       placeholder="e.g., 4.80 or A"
                       disabled={!isPaid}
-                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${
-                        !isPaid
-                          ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
-                          : "border-gray-200 focus:border-green-500 bg-white"
-                      }`}
+                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-0 ${!isPaid
+                        ? "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed"
+                        : "border-gray-200 focus:border-green-500 bg-white"
+                        }`}
                     />
                   </div>
                 </div>
@@ -653,11 +652,10 @@ const ScholarshipApply = () => {
                 <button
                   type="submit"
                   disabled={!isPaid || loading}
-                  className={`w-full py-4 px-6 rounded-xl text-lg font-bold shadow-lg transition-all duration-300 transform ${
-                    !isPaid || loading
-                      ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                      : "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white hover:shadow-xl hover:scale-[1.02]"
-                  }`}
+                  className={`w-full py-4 px-6 rounded-xl text-lg font-bold shadow-lg transition-all duration-300 transform ${!isPaid || loading
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white hover:shadow-xl hover:scale-[1.02]"
+                    }`}
                 >
                   {loading ? (
                     <div className="flex items-center justify-center space-x-3">

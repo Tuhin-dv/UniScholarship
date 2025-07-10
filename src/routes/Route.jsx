@@ -16,6 +16,7 @@ import AllReviews from '../pages/Dashboard/Moderator/AllReviews';
 import ScholarshipApply from '../pages/Dashboard/Moderator/User/ScholarshipApply';
 import MyApplications from '../pages/Dashboard/Moderator/User/MyApplications';
 import DashboardHome from '../pages/Dashboard/DashboardHome';
+import Payment from '../pages/Dashboard/Payment/Payment';
 
 
 
@@ -93,6 +94,10 @@ export const router = createBrowserRouter([
       {
         path: 'my-application',
         Component: MyApplications
+      },
+      {
+        path: 'payment/:id',
+        Component: Payment
       }
 
     ]
