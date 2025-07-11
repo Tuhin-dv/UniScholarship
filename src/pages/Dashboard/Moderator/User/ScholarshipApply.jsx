@@ -4,12 +4,18 @@ import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../../context/AuthContext/AuthContext";
+import PaymentForm from "../../Payment/PaymentForm";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 const ScholarshipApply = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
- const navigate = useNavigate()
+  const navigate = useNavigate()
+
+  const stripePromise = loadStripe(import.meta.env.VITE_payment_key)
+
   // Fetch scholarship detail by id
   const {
     data: scholarship,
@@ -118,9 +124,9 @@ const ScholarshipApply = () => {
   };
 
   const handlePayment = (id) => {
-     console.log(id)
+    console.log(id)
 
-     navigate(`/dashboard/payment/${id}`)
+    navigate(`/dashboard/payment/${id}`)
     // toast.success("Payment successful! Now submit your application.");
   };
 
@@ -284,7 +290,7 @@ const ScholarshipApply = () => {
           </div>
 
           {/* Payment Section */}
-          {!isPaid && (
+          {/* {!isPaid && (
             <div className="p-6 bg-gradient-to-r from-green-50 to-emerald-50 border-t border-gray-200">
               <div className="flex items-center justify-between mb-4">
                 <div>
@@ -326,10 +332,17 @@ const ScholarshipApply = () => {
              
               </div>
             </div>
-          )}
+          )} */}
+
+          <Elements stripe={stripePromise}>
+            <PaymentForm scholarship={scholarship} onPaymentSuccess={() => setIsPaid(true)} />
+          </Elements>
+
+
+
 
           {/* Payment Success Banner */}
-          {isPaid && (
+          {/* {isPaid && (
             <div className="p-6 bg-gradient-to-r from-green-50 to-emerald-50 border-t border-gray-200">
               <div className="flex items-center space-x-4">
                 <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full">
@@ -355,7 +368,7 @@ const ScholarshipApply = () => {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
         </div>
 
         {/* Application Form */}

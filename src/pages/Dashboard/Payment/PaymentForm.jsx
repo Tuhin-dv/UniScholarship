@@ -1,78 +1,75 @@
-import React, { useEffect, useState } from 'react'
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import axios from "axios";
 
-function PaymentForm({ amount = 5000 }) {
-  const stripe = useStripe()
-  const elements = useElements()
-  const [clientSecret, setClientSecret] = useState('')
-  const [processing, setProcessing] = useState(false)
-  const [paymentSuccess, setPaymentSuccess] = useState(null)
+function PaymentForm({ scholarship, onPaymentSuccess }) {
+  const { applicationFees: amount } = scholarship;
+  const stripe = useStripe();
+  const elements = useElements();
+  const [clientSecret, setClientSecret] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(null);
 
-  // Get clientSecret from backend
   useEffect(() => {
     if (amount > 0) {
       axios
-        .post('http://localhost:5000/create-payment-intent', { amount })
-        .then((res) => {
-          setClientSecret(res.data.clientSecret)
-        })
-        .catch((err) => console.error('Error fetching client secret:', err))
+        .post("http://localhost:5000/create-payment-intent", { amount })
+        .then((res) => setClientSecret(res.data.clientSecret))
+        .catch((err) => console.error("Error getting client secret:", err));
     }
-  }, [amount])
+  }, [amount]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!stripe || !elements || !clientSecret) return
+    if (!stripe || !elements || !clientSecret) return;
 
-    setProcessing(true)
+    setProcessing(true);
 
-    const card = elements.getElement(CardElement)
-    if (!card) return
+    const card = elements.getElement(CardElement);
+    if (!card) return;
 
     const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card,
       },
-    })
+    });
 
     if (error) {
-      console.error('[Payment error]', error.message)
-      setProcessing(false)
+      console.error("Payment error:", error.message);
+      setProcessing(false);
     } else {
-      console.log('[Payment success]', paymentIntent)
-      setPaymentSuccess(paymentIntent.id)
-      setProcessing(false)
+      console.log("Payment success:", paymentIntent);
+      setPaymentSuccess(paymentIntent.id);
+      onPaymentSuccess(); // ✅ Notify parent
+      setProcessing(false);
     }
-  }
+  };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className=" w-full p-6 bg-white shadow rounded-xl space-y-6"
-    >
-      <h2 className="text-xl font-bold text-center text-gray-800">Pay with Card</h2>
+    <form onSubmit={handleSubmit} className="p-4 bg-white shadow rounded-xl space-y-4">
+      <h3 className="text-lg font-bold text-gray-700">Pay with Card</h3>
 
-      <div className="border p-4 rounded">
+      <div className="border p-3 rounded">
         <CardElement />
       </div>
 
       <button
         type="submit"
-        disabled={!stripe || processing}
-        className="w-full py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded"
+        disabled={!stripe || processing || paymentSuccess} // ✅ Disable if payment is done
+        className="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700 disabled:opacity-50"
       >
-        {processing ? 'Processing...' : 'Pay Now'}
+        {processing ? "Processing..." : `Pay $${amount}`}
       </button>
 
       {paymentSuccess && (
-        <p className="text-green-600 text-center">
-          ✅ Payment successful! Transaction ID: {paymentSuccess}
+        <p className="text-green-600 text-sm text-center mt-2">
+          ✅ Payment successful! <br />
+          <span className="font-semibold">Transaction ID:</span> {paymentSuccess}
         </p>
       )}
     </form>
-  )
+  );
 }
 
-export default PaymentForm
+export default PaymentForm;
