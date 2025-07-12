@@ -4,7 +4,7 @@ const testimonials = [
   {
     name: "Ayesha Siddique",
     profession: "Scholarship Winner, Canada",
-    image: "https://i.ibb.co/tLpkSgy/user1.jpg",
+    image: "https://i.ibb.co/x8RD46VN/compressed-alex-mccarthy-RGKd-WJOUFH0-unsplash.jpg",
     quote:
       "UniScholar made my dream come true. I applied, got selected, and now I'm studying abroad!",
     rating: 5,
@@ -14,7 +14,7 @@ const testimonials = [
   {
     name: "Farhan Ahmed",
     profession: "Language Student, Japan",
-    image: "https://i.ibb.co/3Nsm41s/user2.jpg",
+    image: "https://i.ibb.co/F4sk2Qvk/irene-strong-v2a-Knj-Mb-P-k-unsplash.jpg",
     quote:
       "Simple process, responsive team, and everything was organized. Highly recommend UniScholar!",
     rating: 5,
@@ -24,7 +24,7 @@ const testimonials = [
   {
     name: "Nusrat Jahan",
     profession: "Masters Candidate, UK",
-    image: "https://i.ibb.co/WKGsZkz/user3.jpg",
+    image: "https://i.ibb.co/DHJF6Gy7/joshua-rondeau-Zn-HRNtw-Xg6-Q-unsplash.jpg",
     quote:
       "UniScholar helped me get a full scholarship. Their platform is truly a life-changer.",
     rating: 5,
@@ -34,7 +34,7 @@ const testimonials = [
   {
     name: "Imran Kabir",
     profession: "PhD Scholar, Germany",
-    image: "https://i.ibb.co/fQw6r7x/user4.jpg",
+    image: "https://i.ibb.co/1GdYp7GL/christian-buehner-DIt-Ylc26z-VI-unsplash.jpg",
     quote:
       "UniScholar supported me at every step. From application to interview, it was seamless.",
     rating: 5,
@@ -42,9 +42,9 @@ const testimonials = [
     scholarship: "$40,000",
   },
   {
-    name: "Meher Afroz",
+    name: "Tuhin Ahmed",
     profession: "Undergraduate, Australia",
-    image: "https://i.ibb.co/QmjqT8z/user5.jpg",
+    image: "https://i.ibb.co/20bmfhwf/1749574169155.jpg",
     quote:
       "I never thought I'd study abroad until I found UniScholar. Highly professional and helpful.",
     rating: 5,
@@ -123,7 +123,7 @@ const Testimonials = () => {
 
           <h2 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
-              Success Stories
+              What Say Our Students
             </span>
           </h2>
 

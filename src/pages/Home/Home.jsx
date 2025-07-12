@@ -4,19 +4,46 @@ import useScholarships from "../../hooks/useScholarships";
 import ScholarshipCard from "../../components/ScholarshipCard";
 import { Link } from "react-router";
 import Testimonials from "../../components/testimonials";
+import HowItWorks from "../../components/HowItWorks";
 
 function Home() {
   const { scholarships, isLoading } = useScholarships();
 
-  const topScholarships = scholarships
-    .sort((a, b) => a.applicationFees - b.applicationFees) // sort by fees
-    .slice(0, 6); // pick top 6
+const topScholarships = scholarships
+  .filter(s => s.postDate && s.applicationFees !== undefined)
+  .sort((a, b) => {
+    const dateA = new Date(a.postDate);
+    const dateB = new Date(b.postDate);
+
+    const parseFee = (fee) => {
+      if (typeof fee === "string") {
+        return parseFloat(fee.replace(/[^0-9.]/g, "")) || 0;
+      }
+      if (typeof fee === "number") {
+        return fee;
+      }
+      return 0; // fallback if fee is something else
+    };
+
+    const feeA = parseFee(a.applicationFees);
+    const feeB = parseFee(b.applicationFees);
+
+    // Sort by recent postDate first, then by low applicationFees
+    if (dateB - dateA !== 0) {
+      return dateB - dateA;
+    }
+    return feeA - feeB;
+  })
+  .slice(0, 6);
+
+
+
 
   return (
     <>
 
       <div>
-        <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+        <div className="min-h-screen bg-gradient-to-br from-sky-500 via-white to-purple-500">
           {/* Banner Section */}
           <div className="relative">
             <BannerSlider />
@@ -119,12 +146,7 @@ function Home() {
                     {topScholarships.map((item, idx) => (
                       <div
                         key={idx}
-                        className={`transform transition-all duration-500 hover:scale-[1.02] ${idx % 3 === 0
-                          ? "md:translate-y-0"
-                          : idx % 3 === 1
-                            ? "md:translate-y-4"
-                            : "md:translate-y-8"
-                          }`}
+                      
                       >
                         <div className="relative">
                           {/* Card Background Glow */}
@@ -135,21 +157,7 @@ function Home() {
                             <ScholarshipCard scholarship={item} />
                           </div>
 
-                          {/* Floating Badge for Featured */}
-                          {idx < 3 && (
-                            <div className="absolute -top-3 -right-3 z-20">
-                              <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg flex items-center space-x-1">
-                                <svg
-                                  className="w-3 h-3"
-                                  fill="currentColor"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <span>Featured</span>
-                              </div>
-                            </div>
-                          )}
+                       
                         </div>
                       </div>
                     ))}
@@ -191,6 +199,7 @@ function Home() {
             <div className="absolute bottom-40 right-1/3 w-5 h-5 bg-indigo-400 rounded-full opacity-20 animate-bounce animation-delay-150"></div>
           </section>
         </div>
+        <HowItWorks></HowItWorks>
         <Testimonials></Testimonials>
       </div>
 

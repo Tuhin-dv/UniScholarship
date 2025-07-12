@@ -3,6 +3,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 
 function PaymentForm({ scholarship, onPaymentSuccess }) {
+
   const { applicationFees: amount } = scholarship;
   const stripe = useStripe();
   const elements = useElements();

@@ -1,10 +1,10 @@
+const stripePromise = loadStripe(import.meta.env.VITE_payment_key)
 import React from 'react'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import PaymentForm from './PaymentForm'
 
 // Replace with your real Stripe publishable key
-const stripePromise = loadStripe(import.meta.env.VITE_payment_key)
 
 function Payment() {
   return (

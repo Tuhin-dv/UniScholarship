@@ -1,5 +1,6 @@
+const stripePromise = loadStripe(import.meta.env.VITE_payment_key)
 import React, { useContext, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
@@ -12,9 +13,8 @@ const ScholarshipApply = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate()
+ 
 
-  const stripePromise = loadStripe(import.meta.env.VITE_payment_key)
 
   // Fetch scholarship detail by id
   const {
@@ -123,12 +123,12 @@ const ScholarshipApply = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePayment = (id) => {
-    console.log(id)
+  // const handlePayment = (id) => {
+  //   console.log(id)
 
-    navigate(`/dashboard/payment/${id}`)
-    // toast.success("Payment successful! Now submit your application.");
-  };
+  //   navigate(`/dashboard/payment/${id}`)
+  //   // toast.success("Payment successful! Now submit your application.");
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -288,87 +288,11 @@ const ScholarshipApply = () => {
               </div>
             </div>
           </div>
-
-          {/* Payment Section */}
-          {/* {!isPaid && (
-            <div className="p-6 bg-gradient-to-r from-green-50 to-emerald-50 border-t border-gray-200">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">
-                    Payment Required
-                  </h3>
-                  <p className="text-gray-600">
-                    Complete the payment to unlock the application form
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm text-gray-500 mb-1">Amount to pay</p>
-                  <p className="text-3xl font-bold text-green-600">
-                    ${scholarship.applicationFees}
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <p className="text-black"></p>
-             
-                  <button
-                    onClick={()=>handlePayment(id)}
-                    className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-4 px-6 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center space-x-3"
-                  >
-                    <svg
-                      className="w-6 h-6"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span>Pay {scholarship.applicationFees} to Apply</span>
-                  </button>
-             
-              </div>
-            </div>
-          )} */}
-
+          {/* stripe payment ====================================================== */}
           <Elements stripe={stripePromise}>
             <PaymentForm scholarship={scholarship} onPaymentSuccess={() => setIsPaid(true)} />
           </Elements>
 
-
-
-
-          {/* Payment Success Banner */}
-          {/* {isPaid && (
-            <div className="p-6 bg-gradient-to-r from-green-50 to-emerald-50 border-t border-gray-200">
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full">
-                  <svg
-                    className="w-6 h-6 text-green-600"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-green-800">
-                    Payment Successful!
-                  </h3>
-                  <p className="text-green-700">
-                    You can now complete your application form below.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )} */}
         </div>
 
         {/* Application Form */}
