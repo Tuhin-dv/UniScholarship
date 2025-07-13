@@ -80,7 +80,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-br from-sky-500 via-white to-purple-500 py-20 px-4 overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -122,12 +122,12 @@ const Testimonials = () => {
           </div>
 
           <h2 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
-              What Say Our Students
+            <span className=" text-black  animate-gradient">
+              What Our Students Say!
             </span>
           </h2>
 
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-black/80 max-w-3xl mx-auto leading-relaxed">
             Discover how our platform has transformed lives and opened doors to
             educational opportunities worldwide
           </p>
@@ -379,7 +379,7 @@ const TestimonialCard = ({ data, isActive }) => {
       {/* Content */}
       <div className="space-y-6">
         {/* Quote */}
-        <blockquote className="text-xl md:text-2xl text-white font-medium leading-relaxed italic">
+        <blockquote className="text-xl md:text-2xl text-black border-black font-medium leading-relaxed italic">
           "{data.quote}"
         </blockquote>
 
@@ -421,19 +421,19 @@ const TestimonialCard = ({ data, isActive }) => {
           </div>
 
           <div className="flex-1">
-            <h4 className="text-2xl font-bold text-white mb-1">{data.name}</h4>
-            <p className="text-purple-300 font-medium mb-2">
+            <h4 className="text-2xl font-bold text-black mb-1">{data.name}</h4>
+            <p className="text-black font-medium mb-2">
               {data.profession}
             </p>
 
             <div className="flex items-center space-x-4 text-sm">
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                <span className="text-gray-300">{data.country}</span>
+                <span className="text-black">{data.country}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="text-gray-300">{data.scholarship}</span>
+                <span className="text-black">{data.scholarship}</span>
               </div>
             </div>
           </div>

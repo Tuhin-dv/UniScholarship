@@ -1,70 +1,104 @@
-"use client"
-import { useContext, useState } from "react"
-import { useForm } from "react-hook-form"
-import { FaEnvelope, FaLock, FaUser, FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa"
-import { AuthContext } from "../../context/AuthContext/AuthContext"
-import toast from "react-hot-toast"
-import { useNavigate } from "react-router"
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import {
+  FaEnvelope,
+  FaLock,
+  FaUser,
+  FaGoogle,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
+import useAxios from "../../hooks/useAxios";
 
 const Register = () => {
-  const { createUser, googleSignIn } = useContext(AuthContext)
-  const [showPassword, setShowPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false)
-  const navigate = useNavigate()
+  const { createUser, googleSignIn } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const navigate = useNavigate();
+  const axiosSecure = useAxios();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm()
+  } = useForm();
 
   const onSubmit = async (data) => {
-    setIsLoading(true)
-    console.log("Registration Data", data)
+    setIsLoading(true);
 
     try {
-      const result = await createUser(data.email, data.password)
-      console.log("User created:", result.user)
-        toast.success("Login successful! 🎉") // ✅ success toast
-        navigate("/")
-      // TODO: redirect / show success toast
+      const result = await createUser(data.email, data.password);
+      const createdUser = result.user;
+
+      const userInfo = {
+        name: createdUser.displayName || data.name,
+        email: createdUser.email,
+        photoURL: createdUser.photoURL || "",
+        role: "user",
+        createdAt: new Date().toISOString(),
+        lastLogIn: new Date().toISOString(),
+      };
+
+      const res = await axiosSecure.post("/users", userInfo);
+
+      if (res.status === 200 || res.status === 201) {
+        toast.success("Account created and saved to DB! 🎉");
+        navigate("/");
+      } else {
+        toast.error("User created but failed to save in DB.");
+      }
     } catch (error) {
-      console.error("Registration error:", error.message)
-      // TODO: show error toast
-      toast.error("Login failed. Please try again.") // ❌ error toast
+      console.error("Registration error:", error.message);
+      toast.error("Registration failed. Please try again.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
-const handleGoogleLogin = async () => {
-  setIsGoogleLoading(true)
-  try {
-    const result = await googleSignIn()
-    console.log("Google login success:", result.user)
+  const handleGoogleLogin = async () => {
+    setIsGoogleLoading(true);
 
-    toast.success("Login successful! 🎉") // ✅ success toast
+    try {
+      const result = await googleSignIn();
+      const user = result.user;
 
-    navigate("/") // ✅ redirect to home
-  } catch (error) {
-    console.error("Google login error:", error.message)
+      const userInfo = {
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        role: "user",
+        createdAt: new Date().toISOString(),
+        lastLogIn: new Date().toISOString(),
+      };
 
-    toast.error("Login failed. Please try again.") // ❌ error toast
-  } finally {
-    setIsGoogleLoading(false)
-  }
-}
-  const password = watch("password", "")
+      const checkRes = await axiosSecure.get(`/users?email=${user.email}`);
+      if (!checkRes.data.exists) {
+        await axiosSecure.post("/users", userInfo);
+      }
+
+      toast.success("Login successful! 🎉");
+      navigate("/");
+    } catch (error) {
+      console.error("Google login error:", error.message);
+      toast.error("Login failed. Please try again.");
+    } finally {
+      setIsGoogleLoading(false);
+    }
+  };
+
+  const password = watch("password", "");
 
   return (
-    <div className="min-h-screen flex items-center justify-center  px-4 py-8 relative overflow-hidden">
-    
-
-      <div className="bg-white/95 backdrop-blur-xl rounded-3xl w-full  relative z-10 border border-white/20">
+    <div className="min-h-screen flex items-center justify-center px-4 py-8 relative overflow-hidden">
+      <div className="bg-white/95 backdrop-blur-xl rounded-3xl w-full max-w-xl  border border-white/20">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-4 ">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-4">
             <FaUser className="text-white text-xl" />
           </div>
           <h2 className="text-3xl font-bold text-gray-800 mb-2">Join UniScholar</h2>
@@ -77,21 +111,16 @@ const handleGoogleLogin = async () => {
             <label className="text-sm font-semibold text-gray-700 block">Full Name</label>
             <div className="relative group">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <FaUser className="text-gray-400 group-focus-within:text-blue-500 transition-colors duration-200" />
+                <FaUser className="text-gray-400" />
               </div>
               <input
                 type="text"
                 {...register("name", { required: "Name is required" })}
                 placeholder="Enter your full name"
-                className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:bg-gray-100"
+                className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
-            {errors.name && (
-              <p className="text-red-500 text-sm flex items-center gap-1 mt-1">
-                <span className="w-1 h-1 bg-red-500 rounded-full"></span>
-                {errors.name.message}
-              </p>
-            )}
+            {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
           </div>
 
           {/* Email Field */}
@@ -99,7 +128,7 @@ const handleGoogleLogin = async () => {
             <label className="text-sm font-semibold text-gray-700 block">Email Address</label>
             <div className="relative group">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <FaEnvelope className="text-gray-400 group-focus-within:text-blue-500 transition-colors duration-200" />
+                <FaEnvelope className="text-gray-400" />
               </div>
               <input
                 type="email"
@@ -111,15 +140,10 @@ const handleGoogleLogin = async () => {
                   },
                 })}
                 placeholder="Enter your email"
-                className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:bg-gray-100"
+                className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
-            {errors.email && (
-              <p className="text-red-500 text-sm flex items-center gap-1 mt-1">
-                <span className="w-1 h-1 bg-red-500 rounded-full"></span>
-                {errors.email.message}
-              </p>
-            )}
+            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
           </div>
 
           {/* Password Field */}
@@ -127,42 +151,37 @@ const handleGoogleLogin = async () => {
             <label className="text-sm font-semibold text-gray-700 block">Password</label>
             <div className="relative group">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <FaLock className="text-gray-400 group-focus-within:text-blue-500 transition-colors duration-200" />
+                <FaLock className="text-gray-400" />
               </div>
               <input
                 type={showPassword ? "text" : "password"}
                 {...register("password", {
                   required: "Password is required",
-                  minLength: { value: 6, message: "Password must be at least 6 characters" },
+                  minLength: { value: 6, message: "Minimum 6 characters required" },
                   pattern: {
                     value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
-                    message: "Must include 1 uppercase letter & 1 special character",
+                    message: "Must include 1 uppercase & 1 special character",
                   },
                 })}
                 placeholder="Create a strong password"
-                className="w-full pl-12 pr-12 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:bg-gray-100"
+                className="w-full pl-12 pr-12 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 outline-none"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-            {errors.password && (
-              <p className="text-red-500 text-sm flex items-center gap-1 mt-1">
-                <span className="w-1 h-1 bg-red-500 rounded-full"></span>
-                {errors.password.message}
-              </p>
-            )}
+            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {isLoading ? (
               <>
@@ -189,7 +208,7 @@ const handleGoogleLogin = async () => {
         <button
           onClick={handleGoogleLogin}
           disabled={isGoogleLoading}
-          className="w-full bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 font-semibold py-4 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3 group"
+          className="w-full bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 font-semibold py-4 rounded-xl transition-all flex items-center justify-center gap-3 disabled:opacity-50"
         >
           {isGoogleLoading ? (
             <>
@@ -198,7 +217,7 @@ const handleGoogleLogin = async () => {
             </>
           ) : (
             <>
-              <FaGoogle className="text-red-500 text-lg group-hover:scale-110 transition-transform duration-200" />
+              <FaGoogle className="text-red-500 text-lg" />
               Continue with Google
             </>
           )}
@@ -210,7 +229,7 @@ const handleGoogleLogin = async () => {
             Already have an account?{" "}
             <a
               href="/login"
-              className="text-blue-600 hover:text-blue-700 font-semibold hover:underline transition-colors duration-200"
+              className="text-blue-600 hover:text-blue-700 font-semibold hover:underline"
             >
               Sign in here
             </a>
@@ -218,7 +237,7 @@ const handleGoogleLogin = async () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

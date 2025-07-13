@@ -17,6 +17,10 @@ import ScholarshipApply from '../pages/Dashboard/Moderator/User/ScholarshipApply
 import MyApplications from '../pages/Dashboard/Moderator/User/MyApplications';
 import DashboardHome from '../pages/Dashboard/DashboardHome';
 import Payment from '../pages/Dashboard/Payment/Payment';
+import MyReviews from '../pages/Dashboard/Moderator/User/MyReviews';
+import ManageUsers from '../pages/Dashboard/Moderator/ManageUsers';
+import AdminOrModeratorRoute from '../components/routes/AdminOrModeratorRoute';
+import ModeratorRoute from '../components/routes/ModeratorRoute';
 
 
 
@@ -30,7 +34,7 @@ export const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: '/all-scholarships',
+        path: 'all-scholarships',
         Component: AllScholarships
       },
       {
@@ -59,16 +63,22 @@ export const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    Component: DashboardLayout,
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
     children: [
       {
-       index: true,
-       Component: DashboardHome
+        index: true,
+        Component: DashboardHome
       },
       //Moderator route
       {
         path: 'add-scholarship',
-        Component: AddScholarship
+        element:
+
+     <PrivateRoute>
+          <AdminOrModeratorRoute>
+            <AddScholarship />
+          </AdminOrModeratorRoute>
+     </PrivateRoute>
       },
       {
         path: 'all-applied',
@@ -77,6 +87,10 @@ export const router = createBrowserRouter([
       {
         path: 'manage-scholarships',
         Component: ManageScholarships
+      },
+      {
+        path: 'manage-users',
+        Component: ManageUsers
       },
       {
         path: 'my-profile',
@@ -94,6 +108,10 @@ export const router = createBrowserRouter([
       {
         path: 'my-application',
         Component: MyApplications
+      },
+      {
+        path: 'my-reviews',
+        Component: MyReviews
       },
       {
         path: 'payment/:id',

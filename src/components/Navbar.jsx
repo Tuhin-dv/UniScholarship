@@ -4,10 +4,12 @@ import { FaBars, FaGraduationCap, FaTimes } from "react-icons/fa";
 import { AuthContext } from "../context/AuthContext/AuthContext";
 
 
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userModalOpen, setUserModalOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
+
 
   const handleLogout = () => {
     logout()
@@ -187,7 +189,7 @@ const Navbar = () => {
                   }}
                   className="flex items-center space-x-4 w-full p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl border border-purple-100 hover:from-purple-100 hover:to-blue-100 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+                  <div className="w-12 h-12  rounded-full flex items-center justify-center text-white font-bold shadow-lg">
                     {user.displayName?.charAt(0) ||
                       user.email?.charAt(0) ||
                       "U"}
@@ -198,7 +200,7 @@ const Navbar = () => {
                     </p>
                     <p className="text-sm text-gray-600">View Profile</p>
                   </div>
-                </button>
+                </button> 
 
                 <button
                   onClick={handleLogout}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import {
   FaUser,
@@ -10,74 +10,131 @@ import {
   FaBars,
   FaTimes,
   FaHome,
-  FaCog,
   FaBell,
   FaChevronRight,
   FaGraduationCap,
 } from "react-icons/fa";
-import { FiFolder } from "react-icons/fi";
+import { AuthContext } from "../context/AuthContext/AuthContext";
+import useUserRole from "../hooks/useUserRole";
+
+const menuItems = [
+  // Sobar jonno
+  {
+    roles: ["user", "moderator", "admin"],
+    items: [
+      {
+        to: "/dashboard/my-profile",
+        icon: FaUser,
+        label: "My Profile",
+        color: "text-blue-600",
+        bgColor: "bg-blue-50",
+      },
+    ],
+  },
+  // Moderator specific routes
+  {
+    roles: ["moderator"],
+    items: [
+      {
+        to: "/dashboard/manage-scholarships",
+        icon: FaListUl,
+        label: "Manage Scholarships",
+        color: "text-purple-600",
+        bgColor: "bg-purple-50",
+      },
+      {
+        to: "/dashboard/all-reviews",
+        icon: FaStar,
+        label: "All Reviews",
+        color: "text-yellow-600",
+        bgColor: "bg-yellow-50",
+      },
+      {
+        to: "/dashboard/all-applied",
+        icon: FaClipboardList,
+        label: "All Applied Scholarships",
+        color: "text-orange-600",
+        bgColor: "bg-orange-50",
+      },
+      {
+        to: "/dashboard/add-scholarship",
+        icon: FaPlusCircle,
+        label: "Add Scholarship",
+        color: "text-green-600",
+        bgColor: "bg-green-50",
+      },
+    ],
+  },
+  // Admin specific routes
+  {
+    roles: ["admin"],
+    items: [
+      {
+        to: "/dashboard/manage-scholarships",
+        icon: FaListUl,
+        label: "Manage Scholarships",
+        color: "text-purple-600",
+        bgColor: "bg-purple-50",
+      },
+      {
+        to: "/dashboard/manage-applied",
+        icon: FaClipboardList,
+        label: "Manage Applied Applications",
+        color: "text-orange-600",
+        bgColor: "bg-orange-50",
+      },
+      {
+        to: "/dashboard/manage-users",
+        icon: FaListUl,
+        label: "Manage Users",
+        color: "text-purple-600",
+        bgColor: "bg-purple-50",
+      },
+      {
+        to: "/dashboard/manage-reviews",
+        icon: FaStar,
+        label: "Manage Reviews",
+        color: "text-yellow-600",
+        bgColor: "bg-yellow-50",
+      },
+      {
+        to: "/dashboard/add-scholarship",
+        icon: FaPlusCircle,
+        label: "Add Scholarship",
+        color: "text-green-600",
+        bgColor: "bg-green-50",
+      },
+    ],
+  },
+];
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { user } = useContext(AuthContext);
+  const { role, roleLoading } = useUserRole();
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-  const menuItems = [
-    {
-      // moderator route-------------------------------------------
-      items: [
-        {
-          to: "/dashboard/my-profile",
-          icon: FaUser,
-          label: "My Profile",
-          color: "text-blue-600",
-          bgColor: "bg-blue-50",
-        },
-        {
-          to: "/dashboard/manage-scholarships",
-          icon: FaListUl,
-          label: "Manage Scholarships",
-          color: "text-purple-600",
-          bgColor: "bg-purple-50",
-        },
-        {
-          to: "/dashboard/add-scholarship",
-          icon: FaPlusCircle,
-          label: "Add Scholarship",
-          color: "text-green-600",
-          bgColor: "bg-green-50",
-        },
-        {
-          to: "/dashboard/all-applied",
-          icon: FaClipboardList,
-          label: "All Applied Scholarships",
-          color: "text-orange-600",
-          bgColor: "bg-orange-50",
-        },
-        {
-          to: "/dashboard/all-reviews",
-          icon: FaStar,
-          label: "All Reviews",
-          color: "text-yellow-600",
-          bgColor: "bg-yellow-50",
-        },
-      ],
-    },
-    {
-    //user route----------------------------
-      items: [
-        {
-          to: "/dashboard/my-application",
-          icon: FiFolder,
-          label: "My Application",
-          color: "text-indigo-600",
-          bgColor: "bg-indigo-50",
-        },
-      ],
-    },
-  ];
+  if (roleLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen text-xl font-semibold text-purple-600">
+        Loading...
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="flex items-center justify-center h-screen text-xl font-semibold text-red-600">
+        Please login to access the dashboard.
+      </div>
+    );
+  }
+
+  // Filter menu sections based on user role
+  const filteredMenuSections = menuItems.filter((section) =>
+    section.roles.includes(role)
+  );
 
   return (
     <div className="h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 flex flex-col overflow-hidden">
@@ -99,9 +156,7 @@ const DashboardLayout = () => {
             <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
               <FaHome className="w-4 h-4 text-white" />
             </div>
-            <h1 className="text-xl font-bold text-gray-900">
-              Moderator Dashboard
-            </h1>
+            <h1 className="text-xl font-bold text-gray-900">Dashboard</h1>
           </div>
 
           <div className="w-10 h-10 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
@@ -123,13 +178,13 @@ const DashboardLayout = () => {
           {/* Sidebar Header - Fixed */}
           <div className="sticky top-0 z-10 bg-gradient-to-r from-purple-600 via-purple-700 to-blue-700 p-6 border-b border-purple-500 shadow-lg">
             <div className="flex items-center justify-between">
-              <Link to='/'>
+              <Link to="/">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                     <FaGraduationCap size={28} />
                   </div>
                   <div className="flex items-center space-x-2 text-white font-extrabold text-2xl  transition">
-                  <span>UniScholar</span>
+                    <span>UniScholar</span>
                   </div>
                 </div>
               </Link>
@@ -143,98 +198,58 @@ const DashboardLayout = () => {
           </div>
 
           {/* Navigation - Scrollable */}
-          <div className="flex-1 overflow-y-auto bg-white">
-            <div className="p-6 space-y-8">
-              {menuItems.map((section, sectionIndex) => (
-                <div key={sectionIndex} className="space-y-4">
-                  {/* Section Title */}
-                  <div className="flex items-center space-x-2 px-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full"></div>
-                    <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wide">
-                      {section.title}
-                    </h3>
-                  </div>
+          <div className="flex-1 overflow-y-auto bg-white p-6 space-y-8">
+            {filteredMenuSections.map((section, sectionIndex) => (
+              <div key={sectionIndex} className="space-y-4">
+                {/* Optional Section Title - You can add if you want */}
 
-                  {/* Menu Items */}
-                  <div className="space-y-2">
-                    {section.items.map((item, itemIndex) => (
-                      <NavLink
-                        key={itemIndex}
-                        to={item.to}
-                        onClick={() => setIsSidebarOpen(false)}
-                        className={({ isActive }) =>
-                          `group relative flex items-center space-x-4 p-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] ${isActive
-                            ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
-                            : `hover:${item.bgColor} text-gray-700 hover:${item.color} hover:shadow-md`
-                          }`
-                        }
-                      >
-                        {({ isActive }) => (
-                          <>
-                            <div
-                              className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 ${isActive
-                                ? "bg-white/20 text-white"
-                                : `${item.bgColor} ${item.color} group-hover:scale-110`
-                                }`}
-                            >
-                              <item.icon className="w-5 h-5" />
-                            </div>
+                {section.items.map((item, itemIndex) => (
+                  <NavLink
+                    key={itemIndex}
+                    to={item.to}
+                    onClick={() => setIsSidebarOpen(false)}
+                    className={({ isActive }) =>
+                      `group relative flex items-center space-x-4 p-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] ${
+                        isActive
+                          ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
+                          : `hover:${item.bgColor} text-gray-700 hover:${item.color} hover:shadow-md`
+                      }`
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <div
+                          className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 ${
+                            isActive
+                              ? "bg-white/20 text-white"
+                              : `${item.bgColor} ${item.color} group-hover:scale-110`
+                          }`}
+                        >
+                          <item.icon className="w-5 h-5" />
+                        </div>
 
-                            <div className="flex-1">
-                              <span className="font-semibold text-sm">
-                                {item.label}
-                              </span>
-                            </div>
+                        <div className="flex-1">
+                          <span className="font-semibold text-sm">{item.label}</span>
+                        </div>
 
-                            <FaChevronRight
-                              className={`w-3 h-3 transition-all duration-300 ${isActive
-                                ? "text-white translate-x-1"
-                                : "text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1"
-                                }`}
-                            />
+                        <FaChevronRight
+                          className={`w-3 h-3 transition-all duration-300 ${
+                            isActive
+                              ? "text-white translate-x-1"
+                              : "text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1"
+                          }`}
+                        />
 
-                            {/* Active Indicator */}
-                            {isActive && (
-                              <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-white rounded-r-full"></div>
-                            )}
-                          </>
+                        {/* Active Indicator */}
+                        {isActive && (
+                          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-8 bg-white rounded-r-full"></div>
                         )}
-                      </NavLink>
-                    ))}
-                  </div>
-                </div>
-              ))}
-
-              {/* Divider */}
-              <div className="border-t border-gray-200 pt-6">
-                <NavLink
-                  to="/"
-                  onClick={() => setIsSidebarOpen(false)}
-                  className="group flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200 text-gray-700 hover:text-gray-900 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md"
-                >
-                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-200 text-gray-600 group-hover:bg-gray-300 group-hover:scale-110 transition-all duration-300">
-                    <FaArrowLeft className="w-4 h-4" />
-                  </div>
-                  <span className="font-semibold text-sm">Back to Home</span>
-                  <FaChevronRight className="w-3 h-3 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all duration-300" />
-                </NavLink>
+                      </>
+                    )}
+                  </NavLink>
+                ))}
               </div>
-
-              {/* Bottom Decoration */}
-              <div className="mt-8 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl border border-purple-100">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                    <FaStar className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-gray-800">
-                      Admin Panel
-                    </p>
-                    <p className="text-xs text-gray-600">Premium Access</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -257,12 +272,8 @@ const DashboardLayout = () => {
                     <FaHome className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h1 className="text-2xl font-bold text-gray-900">
-                      Moderator Dashboard
-                    </h1>
-                    <p className="text-sm text-gray-600">
-                      Manage scholarships and applications
-                    </p>
+                    <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+                    <p className="text-sm text-gray-600">Manage scholarships and applications</p>
                   </div>
                 </div>
 
@@ -281,10 +292,8 @@ const DashboardLayout = () => {
           </div>
 
           {/* Page Content - Scrollable */}
-          <div className="flex-1 overflow-y-auto bg-gradient-to-br from-gray-50 via-white to-gray-50">
-            <div className="p-6 lg:p-8">
-              <Outlet />
-            </div>
+          <div className="flex-1 overflow-y-auto bg-gradient-to-br from-gray-50 via-white to-gray-50 p-4">
+            <Outlet />
           </div>
         </div>
       </div>

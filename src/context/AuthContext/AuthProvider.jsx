@@ -9,6 +9,9 @@ import {
   signInWithPopup
 } from 'firebase/auth';
 import { auth } from '../../firebase/Firebase.config';
+import useAxios from '../../hooks/useAxios';
+
+
 
 
 function AuthProvider({ children }) {
@@ -39,17 +42,32 @@ function AuthProvider({ children }) {
     setLoading(true);
     return signOut(auth);
   };
-
-  // Track user state
+  const axiosSecure = useAxios();
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentUser => {
-      setUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        try {
+          const res = await axiosSecure.get(`/users?email=${currentUser.email}`);
+          const userData = res.data;
+
+          setUser({
+            ...currentUser,
+            role: userData?.role || 'user',
+          });
+        } catch (err) {
+          console.error("Failed to fetch role:", err);
+          setUser(currentUser);
+        }
+      } else {
+        setUser(null);
+      }
       setLoading(false);
     });
 
-    return () => unsubscribe(); // Clean up
+    return () => unsubscribe();
   }, []);
 
+  // Auth context value
   const authInfo = {
     user,
     loading,
