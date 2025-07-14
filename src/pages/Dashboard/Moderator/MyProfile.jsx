@@ -33,8 +33,8 @@ const MyProfile = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto p-0 mt-10 rounded-3xl shadow-2xl border bg-gradient-to-br from-purple-50 via-white to-blue-50">
-      <div className="flex flex-col items-center py-8 px-6">
+    <div className="max-w-md min-w-[50%]  min-h-[50vh] mx-auto p-0 mt-10 rounded-3xl shadow-2xl border bg-gradient-to-br from-sky-200 via-white to-purple-200 flex flex-col justify-center">
+      <div className="flex flex-col items-center py-8 px-6">                  
         <div className="relative mb-4">
           <img
             src={userInfo?.photoURL || "https://i.ibb.co/smh6Qyz/user.png"}

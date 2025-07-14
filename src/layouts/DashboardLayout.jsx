@@ -176,14 +176,14 @@ const DashboardLayout = () => {
           `}
         >
           {/* Sidebar Header - Fixed */}
-          <div className="sticky top-0 z-10 bg-gradient-to-r from-purple-600 via-purple-700 to-blue-700 p-6 border-b border-purple-500 shadow-lg">
+          <div className="sticky top-0 z-10  p-[18px] border-b  ">
             <div className="flex items-center justify-between">
               <Link to="/">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                  <div className="w-12 h-12 bg-white/20 text-orange-500 rounded-xl flex items-center justify-center backdrop-blur-sm">
                     <FaGraduationCap size={28} />
                   </div>
-                  <div className="flex items-center space-x-2 text-white font-extrabold text-2xl  transition">
+                  <div className="flex items-center space-x-2 text-black font-extrabold text-2xl  transition">
                     <span>UniScholar</span>
                   </div>
                 </div>
@@ -202,7 +202,7 @@ const DashboardLayout = () => {
             {filteredMenuSections.map((section, sectionIndex) => (
               <div key={sectionIndex} className="space-y-4">
                 {/* Optional Section Title - You can add if you want */}
-
+                {/* RouteActive--------------------------------------------------------------------- */}
                 {section.items.map((item, itemIndex) => (
                   <NavLink
                     key={itemIndex}
@@ -211,8 +211,8 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `group relative flex items-center space-x-4 p-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] ${
                         isActive
-                          ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
-                          : `hover:${item.bgColor} text-gray-700 hover:${item.color} hover:shadow-md`
+                          ? " border-b-4 border-purple-600  text-black shadow-lg"
+                          : `hover:${item.bgColor} text-gray-700 font-bold hover:${item.color} hover:shadow-md`
                       }`
                     }
                   >
@@ -221,7 +221,7 @@ const DashboardLayout = () => {
                         <div
                           className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 ${
                             isActive
-                              ? "bg-white/20 text-white"
+                              ? "bg-white/70 text-purple-600"
                               : `${item.bgColor} ${item.color} group-hover:scale-110`
                           }`}
                         >
@@ -292,7 +292,7 @@ const DashboardLayout = () => {
           </div>
 
           {/* Page Content - Scrollable */}
-          <div className="flex-1 overflow-y-auto bg-gradient-to-br from-gray-50 via-white to-gray-50 p-4">
+          <div className="flex-1 overflow-y-auto bg-gradient-to-br from-gray-50 via-white to-gray-50">
             <Outlet />
           </div>
         </div>

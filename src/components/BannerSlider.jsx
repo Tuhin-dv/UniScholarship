@@ -115,7 +115,7 @@ const BannerSlider = () => {
 
                   {/* CTA Section */}
                   <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                    <button className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:from-orange-600 hover:to-red-600 transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-orange-500/25 border border-orange-400/20">
+                    <button className="group inline-flex items-center justify-center gap-3 bg-[linear-gradient(to_right,_#990f2d,_#b01c50)] text-white px-10 py-5 rounded-2xl font-bold text-lg hover:from-orange-600 hover:to-red-600 transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-orange-500/25 border border-orange-400/20">
                       {slide.buttonText}
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                     </button>

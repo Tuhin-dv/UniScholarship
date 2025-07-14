@@ -251,7 +251,7 @@ const ManageScholarships = () => {
                     >
                       {/* Index */}
                       <td className="px-6 py-6">
-                        <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div className="w-10 h-10 shadow-md rounded-xl flex items-center justify-center border font-bold text-black group-hover:scale-110 transition-transform duration-300">
                           {index + 1}
                         </div>
                       </td>

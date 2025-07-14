@@ -7,9 +7,9 @@ const testimonials = [
     image: "https://i.ibb.co/x8RD46VN/compressed-alex-mccarthy-RGKd-WJOUFH0-unsplash.jpg",
     quote:
       "UniScholar made my dream come true. I applied, got selected, and now I'm studying abroad!",
-    rating: 5,
+    rating: 4,
     country: "Canada",
-    scholarship: "$25,000",
+   
   },
   {
     name: "Farhan Ahmed",
@@ -17,9 +17,9 @@ const testimonials = [
     image: "https://i.ibb.co/F4sk2Qvk/irene-strong-v2a-Knj-Mb-P-k-unsplash.jpg",
     quote:
       "Simple process, responsive team, and everything was organized. Highly recommend UniScholar!",
-    rating: 5,
+    rating: 4,
     country: "Japan",
-    scholarship: "$18,000",
+    
   },
   {
     name: "Nusrat Jahan",
@@ -27,9 +27,9 @@ const testimonials = [
     image: "https://i.ibb.co/DHJF6Gy7/joshua-rondeau-Zn-HRNtw-Xg6-Q-unsplash.jpg",
     quote:
       "UniScholar helped me get a full scholarship. Their platform is truly a life-changer.",
-    rating: 5,
+    rating: 3,
     country: "United Kingdom",
-    scholarship: "$35,000",
+    
   },
   {
     name: "Imran Kabir",
@@ -37,9 +37,9 @@ const testimonials = [
     image: "https://i.ibb.co/1GdYp7GL/christian-buehner-DIt-Ylc26z-VI-unsplash.jpg",
     quote:
       "UniScholar supported me at every step. From application to interview, it was seamless.",
-    rating: 5,
+    rating: 4,
     country: "Germany",
-    scholarship: "$40,000",
+    
   },
   {
     name: "Tuhin Ahmed",
@@ -49,7 +49,7 @@ const testimonials = [
       "I never thought I'd study abroad until I found UniScholar. Highly professional and helpful.",
     rating: 5,
     country: "Australia",
-    scholarship: "$22,000",
+    
   },
 ];
 
@@ -93,7 +93,7 @@ const Testimonials = () => {
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className={`absolute w-2 h-2 bg-white/20 rounded-full animate-float-${(i % 3) + 1}`}
+            className={`absolute w-2 h-2 bg-purple-400 rounded-full animate-float-${(i % 3) + 1}`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -264,16 +264,7 @@ const Testimonials = () => {
 
         {/* Auto-play Indicator */}
         <div className="flex justify-center mt-8">
-          <button
-            onClick={() => setAutoPlay(!autoPlay)}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-              autoPlay
-                ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                : "bg-gray-500/20 text-gray-400 border border-gray-500/30"
-            }`}
-          >
-            {autoPlay ? "⏸️ Auto-playing" : "▶️ Paused"}
-          </button>
+        
         </div>
       </div>
 
@@ -356,11 +347,11 @@ const Testimonials = () => {
 
 const TestimonialCard = ({ data, isActive }) => {
   return (
-    <div
-      className={`relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl p-8 shadow-2xl transition-all duration-700 ${
-        isActive ? "shadow-purple-500/30" : "shadow-black/20"
-      }`}
-    >
+  <div
+  className={`relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-[#990f2d54] rounded-3xl p-8 shadow-2xl transition-all duration-700 ${
+    isActive ? "shadow-purple-500/30" : "shadow-black/20"
+  }`}
+>
       {/* Quote Icon */}
       <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-xl">
         <svg

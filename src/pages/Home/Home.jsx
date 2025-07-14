@@ -5,6 +5,7 @@ import ScholarshipCard from "../../components/ScholarshipCard";
 import { Link } from "react-router";
 import Testimonials from "../../components/testimonials";
 import HowItWorks from "../../components/HowItWorks";
+import TeacherSection from "../../components/TeacherSection";
 
 function Home() {
   const { scholarships, isLoading } = useScholarships();
@@ -199,6 +200,7 @@ const topScholarships = scholarships
             <div className="absolute bottom-40 right-1/3 w-5 h-5 bg-indigo-400 rounded-full opacity-20 animate-bounce animation-delay-150"></div>
           </section>
         </div>
+        <TeacherSection></TeacherSection>
         <HowItWorks></HowItWorks>
         <Testimonials></Testimonials>
       </div>

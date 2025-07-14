@@ -107,7 +107,7 @@ const AddScholarship = () => {
 
           <input
             {...register("country", { required: true })}
-            className="input input-bordered w-full "
+            className="input text-white input-bordered w-full "
             placeholder="Country"
           />
 
