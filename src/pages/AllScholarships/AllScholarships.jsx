@@ -70,82 +70,98 @@ function AllScholarships() {
     return [...new Set(scholarships.map((s) => s.scholarshipCategory))].filter(Boolean);
   }, [scholarships]);
 
-  if (isLoading) return <p className="text-center mt-12">Loading...</p>;
+   if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+        <div className="flex flex-col items-center space-y-6">
+          <div className="relative">
+            <div className="w-16 h-16 border-4 border-purple-200 rounded-full animate-spin border-t-purple-600"></div>
+            <div className="w-12 h-12 border-4 border-blue-200 rounded-full animate-spin border-t-blue-600 absolute top-2 left-2 animate-reverse"></div>
+          </div>
+          <div className="text-center">
+            <h3 className="text-xl font-bold text-gray-800 mb-2">Loading Applications</h3>
+            <p className="text-gray-600">Please wait while we fetch all applied scholarships...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
   if (isError) return <p className="text-red-500 text-center mt-12">{error.message}</p>;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <div className="flex flex-col md:flex-row items-center gap-4 mb-8">
-        <input
-          type="text"
-          placeholder="Search by university or category..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="border px-4 py-2 rounded-md w-full md:w-1/2"
-        />
+    <div className="p-6 bg-orange-50">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="flex bg-white p-4 justify-between flex-col md:flex-row items-center gap-4 mb-8">
+          <input
+            type="text"
+            placeholder="Search by university or category..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border px-4 py-2 text-black bg-white focus:border-purple-500 rounded-md w-full md:w-1/2"
+          />
 
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          className="border px-4 py-2 rounded-md"
-        >
-          <option value="all">All Categories</option>
-          {categories.map((cat, idx) => (
-            <option key={idx} value={cat}>{cat}</option>
-          ))}
-        </select>
-
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          className="border px-4 py-2 rounded-md"
-        >
-          <option value="name">Sort by Name</option>
-          <option value="fees-low">Fees (Low to High)</option>
-          <option value="fees-high">Fees (High to Low)</option>
-          <option value="rating">Rating</option>
-        </select>
-      </div>
-
-      {filteredScholarships.length === 0 ? (
-        <div className="text-center text-gray-500">No scholarships found.</div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredScholarships.map((scholarship) => (
-            <ScholarshipCard key={scholarship._id} scholarship={scholarship} />
-          ))}
-        </div>
-      )}
-
-      {/* Pagination */}
-      <div className="flex justify-center items-center gap-2 mt-10">
-        <button
-          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-          className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
-          disabled={page === 1}
-        >
-          Prev
-        </button>
-
-        {[...Array(totalPages)].map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setPage(idx + 1)}
-            className={`px-3 py-1 rounded-md ${
-              page === idx + 1 ? "bg-blue-600 text-white" : "bg-gray-200"
-            }`}
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="border px-8 py-2 bg-white text-black rounded-md"
           >
-            {idx + 1}
-          </button>
-        ))}
+            <option value="all">All Categories</option>
+            {categories.map((cat, idx) => (
+              <option key={idx} value={cat}>{cat}</option>
+            ))}
+          </select>
 
-        <button
-          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-          className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
-          disabled={page === totalPages}
-        >
-          Next
-        </button>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="border px-8 py-2 bg-white text-black rounded-md"
+          >
+            <option value="name">Sort by Name</option>
+            <option value="fees-low">Fees (Low to High)</option>
+            <option value="fees-high">Fees (High to Low)</option>
+            <option value="rating">Rating</option>
+          </select>
+        </div>
+
+        {filteredScholarships.length === 0 ? (
+          <div className="text-center text-gray-500">No scholarships found.</div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredScholarships.map((scholarship) => (
+              <ScholarshipCard key={scholarship._id} scholarship={scholarship} />
+            ))}
+          </div>
+        )}
+
+        {/* Pagination */}
+        <div className="flex justify-center items-center gap-2 mt-10">
+          <button
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            className="px-4 py-2 bg-rose-700 rounded-md disabled:opacity-50"
+            disabled={page === 1}
+          >
+            Prev
+          </button>
+
+          {[...Array(totalPages)].map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setPage(idx + 1)}
+              className={`px-3 py-1 rounded-md ${page === idx + 1 ? "bg-blue-600 text-white" : "bg-gray-400"
+                }`}
+            >
+              {idx + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            className="px-4 py-2 bg-rose-700 rounded-md disabled:opacity-50"
+            disabled={page === totalPages}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

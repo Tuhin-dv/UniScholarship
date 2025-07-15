@@ -30,7 +30,7 @@ const steps = [
 
 const HowItWorks = () => {
     return (
-        <section className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-gray-900 text-white py-24 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-rose-900 via-rose-800 to-pink-900 text-white py-24 overflow-hidden">
 
 
             {/* Animated Background Elements */}
@@ -73,7 +73,7 @@ const HowItWorks = () => {
 
             <div className="max-w-6xl mx-auto px-4 text-center">
                 <h2 className="text-5xl font-extrabold mb-6">
-                    <span className="text-rose-700">
+                    <span className="text-white">
                         How It Works
                     </span>
                 </h2>
