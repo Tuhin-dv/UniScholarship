@@ -218,15 +218,13 @@ const  ScholarshipCard = ({ scholarship }) => {
             <span className="font-medium">Application Status</span>
             <span className="font-semibold text-green-600">Available</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 h-2 rounded-full w-full transition-all duration-500"></div>
-          </div>
+        
         </div>
 
         {/* Action Button */}
         <Link
           to={`/scholarship/${_id}`}
-          className="group/btn w-full inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105"
+          className="group/btn w-full inline-flex items-center justify-center bg-gradient-to-t from-rose-800 to-pink-700 px-6 py-3 text-white border border-[#990f2d] font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105"
         >
           <span className="flex items-center">
             View Details

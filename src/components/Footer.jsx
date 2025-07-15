@@ -1,144 +1,108 @@
 import { Facebook, Instagram, Linkedin, Phone, Mail, MapPin } from "lucide-react"
-import { Link } from "react-router"
-
+import { Link } from "react-router-dom"
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Column 1 - Logo and Info */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-pink-400 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">🎓</span>
-              </div>
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
-                UniScholar
-              </h2>
+    <footer className="bg-gradient-to-br from-gray-950 via-slate-900 to-indigo-950 text-white pt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Logo & About */}
+          <div className="space-y-5">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-pink-500 rounded-xl flex items-center justify-center text-white text-2xl shadow-lg">🎓</div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">UniScholar</h2>
             </div>
-            <p className="text-slate-300 text-sm leading-relaxed max-w-xs">
-              Find scholarships, apply easily, and take your education global with UniScholar. Your gateway to academic
-              excellence.
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Your global scholarship companion. Find, apply, and succeed in your educational journey.
             </p>
-            <div className="flex space-x-4">
-              <a
-                href="#"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5 group-hover:text-blue-400 transition-colors" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5 group-hover:text-pink-400 transition-colors" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5 group-hover:text-blue-400 transition-colors" />
-              </a>
+            <div className="flex gap-4">
+              {[Facebook, Instagram, Linkedin].map((Icon, idx) => (
+                <a
+                  key={idx}
+                  href="#"
+                  className="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition-all duration-300 hover:scale-110 shadow-inner"
+                >
+                  <Icon className="w-5 h-5 text-slate-300 hover:text-white transition-colors" />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Column 2 - Quick Links */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-white relative">
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4 relative inline-block">
               Quick Links
-              <div className="absolute -bottom-1 left-0 w-8 h-0.5 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full"></div>
+              <span className="block w-10 h-0.5 mt-1 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full"></span>
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3 text-sm">
               {[
                 { href: "/", label: "Home" },
                 { href: "/all-scholarships", label: "All Scholarships" },
                 { href: "/login", label: "Login" },
                 { href: "/register", label: "Register" },
-              ].map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-slate-300 hover:text-white transition-colors duration-200 text-sm hover:translate-x-1 transform inline-block"
-                  >
-                    {link.label}
+              ].map(({ href, label }) => (
+                <li key={href}>
+                  <Link to={href} className="text-slate-400 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                    {label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3 - Resources */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-white relative">
+          {/* Resources */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4 relative inline-block">
               Resources
-              <div className="absolute -bottom-1 left-0 w-8 h-0.5 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full"></div>
+              <span className="block w-10 h-0.5 mt-1 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full"></span>
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3 text-sm">
               {[
                 { href: "#", label: "Scholarship Guide" },
                 { href: "#", label: "FAQ" },
                 { href: "#", label: "Support" },
                 { href: "#", label: "Contact" },
-              ].map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-slate-300 hover:text-white transition-colors duration-200 text-sm hover:translate-x-1 transform inline-block"
-                  >
-                    {link.label}
+              ].map(({ href, label }) => (
+                <li key={label}>
+                  <a href={href} className="text-slate-400 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                    {label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 4 - Contact */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-white relative">
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4 relative inline-block">
               Contact Us
-              <div className="absolute -bottom-1 left-0 w-8 h-0.5 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full"></div>
+              <span className="block w-10 h-0.5 mt-1 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full"></span>
             </h3>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3 text-slate-300 hover:text-white transition-colors duration-200 group">
-                <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <span className="text-sm">info@unischolar.com</span>
-              </div>
-              <div className="flex items-center space-x-3 text-slate-300 hover:text-white transition-colors duration-200 group">
-                <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <span className="text-sm">+880-1234-567890</span>
-              </div>
-              <div className="flex items-center space-x-3 text-slate-300 hover:text-white transition-colors duration-200 group">
-                <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <span className="text-sm">Dhaka, Bangladesh</span>
-              </div>
-            </div>
+            <ul className="space-y-4 text-sm text-slate-300">
+              {[
+                { icon: Mail, text: "info@unischolar.com" },
+                { icon: Phone, text: "+880-1234-567890" },
+                { icon: MapPin, text: "Dhaka, Bangladesh" },
+              ].map(({ icon: Icon, text }) => (
+                <li key={text} className="flex items-center gap-3 hover:text-white transition-colors">
+                  <span className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center shadow-sm hover:bg-white/20 transition">
+                    <Icon className="w-4 h-4" />
+                  </span>
+                  {text}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
 
       {/* Bottom Footer */}
-      <div className="border-t border-white/10 bg-black/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
-            <p className="text-slate-400 text-sm">© {new Date().getFullYear()} UniScholar. All rights reserved.</p>
-            <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">
-                Privacy Policy
-              </a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">
-                Terms of Service
-              </a>
-            </div>
+      <div className="mt-16 border-t border-white/10 bg-black/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-slate-500 text-sm">© {new Date().getFullYear()} UniScholar. All rights reserved.</p>
+          <div className="flex gap-6 text-sm">
+            <a href="#" className="text-slate-400 hover:text-white transition">Privacy Policy</a>
+            <a href="#" className="text-slate-400 hover:text-white transition">Terms of Service</a>
           </div>
         </div>
       </div>
@@ -146,4 +110,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default Footer;

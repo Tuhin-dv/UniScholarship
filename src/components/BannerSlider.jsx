@@ -8,41 +8,42 @@ const BannerSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
 
-  const slides = [
-    {
-      id: 1,
-      title: "Find Your Dream Scholarship",
-      subtitle: "Education Made Affordable",
-      description:
-        "Discover thousands of scholarship opportunities tailored to your academic profile. Start your journey towards higher education without financial barriers.",
-      buttonText: "Get Started",
-      stats: "10,000+ Students Helped",
-      bgGradient: "from-slate-900 via-blue-900 to-indigo-900",
-      illustration:img1,
-    },
-    {
-      id: 2,
-      title: "Global Study Opportunities",
-      subtitle: "Study Abroad Programs",
-      description:
-        "Explore international scholarship programs from top universities worldwide. Transform your future with world-class education and cultural experiences.",
-      buttonText: "Explore Now",
-      stats: "50+ Countries Available",
-      bgGradient: "from-purple-900 via-indigo-900 to-blue-900",
-      illustration: img2,
-    },
-    {
-      id: 3,
-      title: "Success Stories Await",
-      subtitle: "Join Our Community",
-      description:
-        "Be part of thousands of successful scholarship recipients who achieved their dreams. Your success story starts here with the right guidance and support.",
-      buttonText: "Join Now",
-      stats: "95% Success Rate",
-      bgGradient: "from-indigo-900 via-purple-900 to-pink-900",
-      illustration:img3,
-    },
-  ]
+ const slides = [
+  {
+    id: 1,
+    title: "Find Your Dream Scholarship",
+    subtitle: "Education Made Affordable",
+    description:
+      "Discover thousands of scholarship opportunities tailored to your academic profile. Start your journey towards higher education without financial barriers.",
+    buttonText: "Get Started",
+    stats: "10,000+ Students Helped",
+    bgGradient: "from-rose-900 via-pink-900 to-purple-900", // ✨ Smooth and academic
+    illustration: img1,
+  },
+  {
+    id: 2,
+    title: "Global Study Opportunities",
+    subtitle: "Study Abroad Programs",
+    description:
+      "Explore international scholarship programs from top universities worldwide. Transform your future with world-class education and cultural experiences.",
+    buttonText: "Explore Now",
+    stats: "50+ Countries Available",
+  bgGradient: "from-rose-900 via-pink-900 to-purple-900", // ✨ Elegant and global
+    illustration: img2,
+  },
+  {
+    id: 3,
+    title: "Success Stories Await",
+    subtitle: "Join Our Community",
+    description:
+      "Be part of thousands of successful scholarship recipients who achieved their dreams. Your success story starts here with the right guidance and support.",
+    buttonText: "Join Now",
+    stats: "95% Success Rate",
+    bgGradient: "from-rose-900 via-pink-900 to-purple-900", // ✨ Inspirational and warm
+    illustration: img3,
+  },
+];
+
 
   // Auto-slide functionality
   useEffect(() => {
@@ -92,7 +93,7 @@ const BannerSlider = () => {
               ></div>
             </div>
 
-            <div className="relative z-10 max-w-[1300px] mx-auto px-6 sm:px-8 lg:px-12 h-full">
+            <div className="relative z-10 max-w-[1700px] mx-auto px-6 sm:px-8 lg:px-12 h-full">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center h-full">
                 {/* Left Side - Text Content */}
                 <div className="space-y-8 text-left">
@@ -159,19 +160,6 @@ const BannerSlider = () => {
                         />
                       </div>
                     </div>
-
-                    {/* Floating Elements */}
-                    <div className="absolute -top-8 -right-8 w-24 h-24 bg-gradient-to-br from-orange-400 to-red-500 rounded-3xl flex items-center justify-center animate-bounce shadow-2xl border border-orange-300/20">
-                      <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg">
-                        <span className="text-3xl">🎓</span>
-                      </div>
-                    </div>
-{/* 
-                    <div className="absolute -bottom-8 -left-8 w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-3xl flex items-center justify-center animate-pulse shadow-2xl border border-blue-300/20">
-                      <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
-                        <span className="text-2xl">💡</span>
-                      </div>
-                    </div> */}
 
                     <div className="absolute top-1/4 -right-12 w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center animate-ping shadow-2xl border border-yellow-300/20">
                       <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">

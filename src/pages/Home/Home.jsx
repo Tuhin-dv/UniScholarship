@@ -1,50 +1,19 @@
 import React from "react";
 import BannerSlider from "../../components/BannerSlider";
-import useScholarships from "../../hooks/useScholarships";
 import ScholarshipCard from "../../components/ScholarshipCard";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import Testimonials from "../../components/testimonials";
 import HowItWorks from "../../components/HowItWorks";
 import TeacherSection from "../../components/TeacherSection";
+import useTopScholarships from "../../hooks/useTopScholarships";
 
 function Home() {
-  const { scholarships, isLoading } = useScholarships();
-
-const topScholarships = scholarships
-  .filter(s => s.postDate && s.applicationFees !== undefined)
-  .sort((a, b) => {
-    const dateA = new Date(a.postDate);
-    const dateB = new Date(b.postDate);
-
-    const parseFee = (fee) => {
-      if (typeof fee === "string") {
-        return parseFloat(fee.replace(/[^0-9.]/g, "")) || 0;
-      }
-      if (typeof fee === "number") {
-        return fee;
-      }
-      return 0; // fallback if fee is something else
-    };
-
-    const feeA = parseFee(a.applicationFees);
-    const feeB = parseFee(b.applicationFees);
-
-    // Sort by recent postDate first, then by low applicationFees
-    if (dateB - dateA !== 0) {
-      return dateB - dateA;
-    }
-    return feeA - feeB;
-  })
-  .slice(0, 6);
-
-
-
+  const { topScholarships, isLoading } = useTopScholarships();
 
   return (
     <>
-
       <div>
-        <div className="min-h-screen bg-gradient-to-br from-sky-500 via-white to-purple-500">
+        <div className="min-h-screen bg-orange-50 relative overflow-hidden">
           {/* Banner Section */}
           <div className="relative">
             <BannerSlider />
@@ -63,10 +32,10 @@ const topScholarships = scholarships
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 transform -skew-y-1"></div>
             </div>
 
-            <div className="max-w-7xl mx-auto relative z-10">
+            <div className="max-w-[1700px] mx-auto relative z-10">
               {/* Section Header */}
               <div className="text-center mb-16 space-y-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl mb-6 shadow-lg">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-rose-700 to-pink-700 rounded-2xl mb-6 shadow-lg">
                   <svg
                     className="w-8 h-8 text-white"
                     fill="currentColor"
@@ -82,9 +51,7 @@ const topScholarships = scholarships
 
                 <div>
                   <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-                    <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                      Top Scholarships
-                    </span>
+                    <span className="text-rose-900">Top Scholarships</span>
                   </h2>
                   <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                     Discover the most affordable and prestigious scholarship
@@ -96,7 +63,7 @@ const topScholarships = scholarships
                 <div className="flex flex-wrap justify-center gap-6 mt-8">
                   <div className="bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-white/50">
                     <div className="text-2xl font-bold text-purple-600">
-                      {scholarships.length}+
+                      {topScholarships.length}+
                     </div>
                     <div className="text-sm text-gray-600">Total Scholarships</div>
                   </div>
@@ -116,13 +83,10 @@ const topScholarships = scholarships
                 <div className="flex items-center justify-center py-20">
                   <div className="bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-12 max-w-md w-full border border-white/50">
                     <div className="flex flex-col items-center space-y-8">
-                      {/* Enhanced Loading Spinner */}
                       <div className="relative">
                         <div className="w-20 h-20 border-4 border-purple-200 rounded-full animate-spin border-t-purple-600 shadow-lg"></div>
                         <div className="w-16 h-16 border-4 border-blue-200 rounded-full animate-spin border-t-blue-600 absolute top-2 left-2 animate-reverse"></div>
-                        <div className="w-12 h-12 border-4 border-pink-200 rounded-full animate-spin border-t-pink-600 absolute top-4 left-4"></div>
                       </div>
-
                       <div className="text-center">
                         <h3 className="text-2xl font-bold text-gray-800 mb-3">
                           Loading Top Scholarships
@@ -130,8 +94,6 @@ const topScholarships = scholarships
                         <p className="text-gray-600 text-lg">
                           Discovering the best opportunities for you...
                         </p>
-
-                        {/* Loading Progress */}
                         <div className="mt-6 w-full bg-gray-200 rounded-full h-2">
                           <div className="bg-gradient-to-r from-purple-600 to-blue-600 h-2 rounded-full animate-pulse w-3/4"></div>
                         </div>
@@ -140,45 +102,34 @@ const topScholarships = scholarships
                   </div>
                 </div>
               ) : (
-                /* Scholarship Cards Grid */
                 <div className="space-y-8">
-                  {/* Enhanced Grid with Masonry Effect */}
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                     {topScholarships.map((item, idx) => (
-                      <div
-                        key={idx}
-                      
-                      >
+                      <div key={idx}>
                         <div className="relative">
-                          {/* Card Background Glow */}
                           <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 rounded-3xl blur-xl -z-10 transform scale-110"></div>
-
-                          {/* Enhanced Card Wrapper */}
                           <div className="bg-white/90 backdrop-blur-sm rounded-3xl border border-white/50 shadow-xl hover:shadow-2xl transition-all duration-500">
                             <ScholarshipCard scholarship={item} />
                           </div>
-
-                       
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  {/* Call to Action Section */}
+                  {/* CTA */}
                   <div className="text-center pt-16">
-                    <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl p-8 md:p-12 shadow-2xl border border-purple-200">
+                    <div className="border-[#990f2d] border-b-8 border-l-8 bg-gradient-to-tr from-rose-900 via-pink-900 to-purple-900 rounded-3xl p-8 md:p-12 shadow-2xl">
                       <div className="max-w-3xl mx-auto text-white">
                         <h3 className="text-3xl md:text-4xl font-bold mb-4">
                           Ready to Start Your Journey?
                         </h3>
-                        <p className="text-xl text-purple-100 mb-8 leading-relaxed">
+                        <p className="text-xl text-gray-100 mb-8 leading-relaxed">
                           Join thousands of students who have already secured their
                           dream scholarships through our platform
                         </p>
-
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                          <Link to='/all-scholarships'>
-                            <button className="bg-white text-purple-600 px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                          <Link to="/all-scholarships">
+                            <button className="bg-white text-[#990f2d] px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                               Browse All Scholarships
                             </button>
                           </Link>
@@ -193,18 +144,21 @@ const topScholarships = scholarships
               )}
             </div>
 
-            {/* Floating Decorative Elements */}
+            {/* Floating Elements */}
             <div className="absolute top-10 left-10 w-4 h-4 bg-purple-400 rounded-full opacity-20 animate-bounce"></div>
             <div className="absolute top-32 right-20 w-6 h-6 bg-blue-400 rounded-full opacity-30 animate-bounce animation-delay-200"></div>
             <div className="absolute bottom-20 left-1/4 w-3 h-3 bg-pink-400 rounded-full opacity-25 animate-bounce animation-delay-300"></div>
             <div className="absolute bottom-40 right-1/3 w-5 h-5 bg-indigo-400 rounded-full opacity-20 animate-bounce animation-delay-150"></div>
           </section>
         </div>
-        <TeacherSection></TeacherSection>
-        <HowItWorks></HowItWorks>
-        <Testimonials></Testimonials>
-      </div>
 
+        {/* Other Sections */}
+        <div className="bg-orange-50 py-16">
+          <TeacherSection />
+        </div>
+        <HowItWorks />
+        <Testimonials />
+      </div>
     </>
   );
 }

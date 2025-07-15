@@ -13,7 +13,7 @@ const AdminOrModeratorRoute = ({ children }) => {
   }
 
   if (!user || (role !== 'admin' && role !== 'moderator')) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/dashboard/forbidden" state={{ from: location }} replace />;
   }
 
   return children;

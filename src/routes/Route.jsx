@@ -21,103 +21,142 @@ import MyReviews from '../pages/Dashboard/Moderator/User/MyReviews';
 import ManageUsers from '../pages/Dashboard/Moderator/ManageUsers';
 import AdminOrModeratorRoute from '../components/routes/AdminOrModeratorRoute';
 import ModeratorRoute from '../components/routes/ModeratorRoute';
-
-
+import ForbiddenAccess from '../components/ForbiddenAccess';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     Component: MainLayout,
     children: [
-      {
-        path: '/',
-        element: <Home />
-      },
-      {
-        path: 'all-scholarships',
-        Component: AllScholarships
-      },
+      { path: '/', element: <Home /> },
+      { path: 'all-scholarships', Component: AllScholarships },
       {
         path: '/scholarship/:id',
-        element: <PrivateRoute>
-          <ScholarshipDetails></ScholarshipDetails>
-        </PrivateRoute> // Your details page component
-      }
-
-
-    ]
+        element: (
+          <PrivateRoute>
+            <ScholarshipDetails />
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
   {
     path: '/',
     Component: AuthLayout,
     children: [
-      {
-        path: '/login',
-        Component: Login
-      },
-      {
-        path: '/register',
-        Component: Register
-      }
-    ]
+      { path: '/login', Component: Login },
+      { path: '/register', Component: Register },
+    ],
   },
   {
     path: '/dashboard',
-    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
-      {
-        index: true,
-        Component: DashboardHome
-      },
-      //Moderator route
+      { index: true, Component: DashboardHome },
+
+      // ✅ Admin or Moderator Routes (Secured)
       {
         path: 'add-scholarship',
-        element:
-
-     <PrivateRoute>
-          <AdminOrModeratorRoute>
-            <AddScholarship />
-          </AdminOrModeratorRoute>
-     </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <AdminOrModeratorRoute>
+              <AddScholarship />
+            </AdminOrModeratorRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: 'all-applied',
-        Component: AllAppliedScholarships
+        element: (
+          <PrivateRoute>
+            <AdminOrModeratorRoute>
+              <AllAppliedScholarships />
+            </AdminOrModeratorRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: 'manage-scholarships',
-        Component: ManageScholarships
+        element: (
+          <PrivateRoute>
+            <AdminOrModeratorRoute>
+              <ManageScholarships />
+            </AdminOrModeratorRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: 'manage-users',
-        Component: ManageUsers
-      },
-      {
-        path: 'my-profile',
-        Component: MyProfile
+        element: (
+          <PrivateRoute>
+            <AdminOrModeratorRoute>
+              <ManageUsers />
+            </AdminOrModeratorRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: 'all-reviews',
-        Component: AllReviews
+        element: (
+          <PrivateRoute>
+            <AdminOrModeratorRoute>
+              <AllReviews />
+            </AdminOrModeratorRoute>
+          </PrivateRoute>
+        ),
       },
-      //user route ----------------------------------
+
+      // ✅ Normal User Routes (Private Only)
       {
         path: 'apply/:id',
-        element: <ScholarshipApply />
+        element: (
+          <PrivateRoute>
+            <ScholarshipApply />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'my-application',
-        Component: MyApplications
+        element: (
+          <PrivateRoute>
+            <MyApplications />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'my-reviews',
-        Component: MyReviews
+        element: (
+          <PrivateRoute>
+            <MyReviews />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'payment/:id',
-        Component: Payment
-      }
+        element: (
+          <PrivateRoute>
+            <Payment />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'my-profile',
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
+      },
 
-    ]
-  }
+      // ❌ Forbidden Page (No wrapper needed)
+      {
+        path: 'forbidden',
+        Component: ForbiddenAccess,
+      },
+    ],
+  },
 ]);

@@ -49,7 +49,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
               isActive
-                ? "bg-[linear-gradient(to_right,_#990f2d,_#b01c50)] text-white shadow-lg"
+                ? "border-b-4 border-[#990f2d] text-[#990f2d] "
                 : "text-gray-700 hover:text-purple-600 hover:bg-purple-50"
             }`
           }
@@ -64,7 +64,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
               isActive
-                ? "bg-[linear-gradient(to_right,_#990f2d,_#b01c50)] text-white shadow-lg"
+                ? "border-b-4 border-[#990f2d] text-[#990f2d] "
                 : "text-gray-700 hover:text-purple-600 hover:bg-purple-50"
             }`
           }
@@ -79,7 +79,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
               isActive
-                ? "bg-[linear-gradient(to_right,_#990f2d,_#b01c50)] text-white shadow-lg"
+                ? "border-b-4 border-[#990f2d] text-[#990f2d] "
                 : "text-gray-700 hover:text-purple-600 hover:bg-purple-50"
             }`
           }
@@ -88,14 +88,14 @@ const Navbar = () => {
         </NavLink>
       </li>
       {!user && (
-        <li>
+        <li className="pl-8">
           <NavLink
             to="/login"
             onClick={() => setMenuOpen(false)}
-            className="relative px-6 py-3 border border-purple-700  text-purple-600 font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 overflow-hidden group"
+            className="relative px-6 py-3 border border-purple-700  text-purple-600 font-bold rounded-xl shadow-lg  transform  overflow-hidden group"
           >
             <span className="relative z-10">Login</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+           
           </NavLink>
         </li>
       )}
@@ -104,7 +104,7 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link
@@ -112,13 +112,13 @@ const Navbar = () => {
             className="flex items-center space-x-3 group transition-all duration-300 transform hover:scale-105"
           >
             <div className="relative">
-              <div className="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+              <div className="w-12 h-12 bg-[#990f2d] rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
                 <FaGraduationCap className="text-white text-xl group-hover:scale-110 transition-transform duration-300" />
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-300 -z-10"></div>
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold text-black ">
                 UniScholar
               </span>
               <span className="text-xs text-gray-500 font-medium">
@@ -129,7 +129,7 @@ const Navbar = () => {
 
           {/* Desktop Nav + User */}
           <div className="hidden lg:flex items-center space-x-6">
-            <ul className="flex items-center space-x-2">{navLinks}</ul>
+            <ul className="flex items-center space-x-4">{navLinks}</ul>
 
             {/* Profile Modal Toggle */}
             {user && (
@@ -138,7 +138,7 @@ const Navbar = () => {
                 className="flex items-center space-x-3 p-2 rounded-xl hover:bg-purple-50 transition-all duration-300 transform hover:scale-105 group"
               >
                 <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg group-hover:shadow-xl transition-all duration-300">
-                  {user.displayName?.charAt(0) ||
+                  {user?.displayName?.charAt(0) ||
                     user.email?.charAt(0) ||
                     "U"}
                 </div>
@@ -191,7 +191,7 @@ const Navbar = () => {
                 </div>
                 <div className="text-left">
                   <p className="font-semibold text-gray-900">
-                    {user.displayName || "User"}
+                    {user?.displayName || "User"}
                   </p>
                   <p className="text-sm text-gray-600">View Profile</p>
                 </div>
@@ -226,7 +226,7 @@ const Navbar = () => {
               </button>
               <div className="flex items-center space-x-4">
                 <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                  {user.displayName?.charAt(0) || user.email?.charAt(0) || "U"}
+                  {user?.displayName?.charAt(0) || user?.email?.charAt(0) || "U"}
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold">User Profile</h2>
@@ -244,7 +244,7 @@ const Navbar = () => {
                       Full Name
                     </p>
                     <p className="text-lg font-bold text-gray-900">
-                      {user.displayName || "Not provided"}
+                      {user?.displayName || "Not provided"}
                     </p>
                   </div>
                 </div>
@@ -255,7 +255,7 @@ const Navbar = () => {
                       Email Address
                     </p>
                     <p className="text-lg font-bold text-gray-900">
-                      {user.email}
+                      {user?.email}
                     </p>
                   </div>
                 </div>
@@ -266,7 +266,7 @@ const Navbar = () => {
                       Account Type
                     </p>
                     <p className="text-lg font-bold text-gray-900">
-                      {user.role || "Student"}
+                      {user?.role || "Student"}
                     </p>
                   </div>
                 </div>
@@ -289,8 +289,11 @@ const Navbar = () => {
                   Edit Profile
                 </button>
                 <button
-                  onClick={handleLogout}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300"
+                  onClick={() => {
+                    setUserModalOpen(false);
+                    handleLogout();
+                  }}
+                  className="w-full  px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300"
                 >
                   Logout
                 </button>

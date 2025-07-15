@@ -9,7 +9,7 @@ const testimonials = [
       "UniScholar made my dream come true. I applied, got selected, and now I'm studying abroad!",
     rating: 4,
     country: "Canada",
-   
+
   },
   {
     name: "Farhan Ahmed",
@@ -19,7 +19,7 @@ const testimonials = [
       "Simple process, responsive team, and everything was organized. Highly recommend UniScholar!",
     rating: 4,
     country: "Japan",
-    
+
   },
   {
     name: "Nusrat Jahan",
@@ -29,7 +29,7 @@ const testimonials = [
       "UniScholar helped me get a full scholarship. Their platform is truly a life-changer.",
     rating: 3,
     country: "United Kingdom",
-    
+
   },
   {
     name: "Imran Kabir",
@@ -39,7 +39,7 @@ const testimonials = [
       "UniScholar supported me at every step. From application to interview, it was seamless.",
     rating: 4,
     country: "Germany",
-    
+
   },
   {
     name: "Tuhin Ahmed",
@@ -49,7 +49,7 @@ const testimonials = [
       "I never thought I'd study abroad until I found UniScholar. Highly professional and helpful.",
     rating: 5,
     country: "Australia",
-    
+
   },
 ];
 
@@ -80,7 +80,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-sky-500 via-white to-purple-500 py-20 px-4 overflow-hidden">
+    <section className="relative min-h-screen bg-orange-50 py-20 px-4 overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -184,9 +184,8 @@ const Testimonials = () => {
               return (
                 <div
                   key={index}
-                  className={`absolute w-full max-w-2xl transition-all duration-700 ease-out transform-gpu ${
-                    isActive ? "animate-float" : ""
-                  }`}
+                  className={`absolute w-full max-w-2xl transition-all duration-700 ease-out transform-gpu ${isActive ? "animate-float" : ""
+                    }`}
                   style={{
                     transform,
                     opacity,
@@ -199,11 +198,11 @@ const Testimonials = () => {
             })}
           </div>
 
-          {/* Navigation Arrows */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-8">
+          {/* Navigation Arrows - Now at bottom center */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-6 z-20">
             <button
               onClick={prevSlide}
-              className="group w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
+              className="group w-14 h-14 bg-gradient-to-r from-rose-700 to-pink-500 rounded-full shadow-xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
             >
               <svg
                 className="w-6 h-6 text-white group-hover:scale-125 transition-transform duration-300"
@@ -211,36 +210,25 @@ const Testimonials = () => {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <button
+              onClick={nextSlide}
+              className="group w-14 h-14 bg-gradient-to-r from-pink-500 to-rose-700 rounded-full shadow-xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
+            >
+              <svg
+                className="w-6 h-6 text-white group-hover:scale-125 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
           </div>
 
-          <div className="absolute top-1/2 -translate-y-1/2 right-4 md:right-8">
-            <button
-              onClick={nextSlide}
-              className="group w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
-            >
-              <svg
-                className="w-6 h-6 text-white group-hover:scale-125 transition-transform duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </div>
         </div>
 
         {/* Testimonial Indicators */}
@@ -253,18 +241,17 @@ const Testimonials = () => {
                 setAutoPlay(false);
                 setTimeout(() => setAutoPlay(true), 10000);
               }}
-              className={`transition-all duration-300 rounded-full ${
-                index === current
-                  ? "w-12 h-3 bg-gradient-to-r from-purple-600 to-blue-600 shadow-lg"
+              className={`transition-all duration-300 rounded-full ${index === current
+                  ? "w-12 h-3 bg-gradient-to-r from-rose-700 to-pink-500 shadow-lg"
                   : "w-3 h-3 bg-gray-600 hover:bg-gray-500"
-              }`}
+                }`}
             />
           ))}
         </div>
 
         {/* Auto-play Indicator */}
         <div className="flex justify-center mt-8">
-        
+
         </div>
       </div>
 
@@ -347,13 +334,12 @@ const Testimonials = () => {
 
 const TestimonialCard = ({ data, isActive }) => {
   return (
-  <div
-  className={`relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-[#990f2d54] rounded-3xl p-8 shadow-2xl transition-all duration-700 ${
-    isActive ? "shadow-purple-500/30" : "shadow-black/20"
-  }`}
->
+    <div
+      className={`relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-[#990f2d54] rounded-3xl p-8 shadow-2xl transition-all duration-700 ${isActive ? "shadow-purple-500/30" : "shadow-black/20"
+        }`}
+    >
       {/* Quote Icon */}
-      <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-xl">
+      <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-pink-700 to-rose-700 rounded-full flex items-center justify-center shadow-xl">
         <svg
           className="w-6 h-6 text-white"
           fill="currentColor"

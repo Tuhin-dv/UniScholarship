@@ -71,59 +71,91 @@ const MyReviews = () => {
     updateMutation.mutate({ id: editingReview._id, updatedData: data });
   };
 
-  if (isLoading) return <div className="text-center py-10">Loading...</div>;
+ if (isLoading)
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 p-6 flex items-center justify-center">
+                <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full">
+                    <div className="flex flex-col items-center space-y-6">
+                        {/* Animated Loading Spinner */}
+                        <div className="relative">
+                            <div className="w-16 h-16 border-4 border-purple-200 rounded-full animate-spin border-t-purple-600"></div>
+                            <div className="w-12 h-12 border-4 border-blue-200 rounded-full animate-spin border-t-blue-600 absolute top-2 left-2 animate-reverse"></div>
+                        </div>
+                        <div className="text-center">
+                            <h3 className="text-xl font-bold text-gray-800 mb-2">
+                                Loading Applications
+                            </h3>
+                            <p className="text-gray-600">
+                                Please wait while we fetch your applications...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
 
   return (
     <div className="p-6 text-black"> {/* Apply text-black globally */}
-  <h2 className="text-2xl font-bold mb-4">My Reviews</h2>
+  <h2 className="text-4xl text-center font-bold mb-4">My Reviews</h2>
   <div className="overflow-x-auto">
-    <table className="table-auto w-full border rounded shadow text-black">
-      <thead className="bg-gray-200">
-        <tr>
-          <th className="px-4 py-2">Scholarship</th>
-          <th className="px-4 py-2">University</th>
-          <th className="px-4 py-2">Comment</th>
-          <th className="px-4 py-2">Date</th>
-          <th className="px-4 py-2">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {reviews.map((review) => (
-          <tr key={review._id} className="text-center text-black">
-            <td className="border px-4 py-2">{review.scholarshipName}</td>
-            <td className="border px-4 py-2">{review.universityName}</td>
-            <td className="border px-4 py-2">{review.comment}</td>
-            <td className="border px-4 py-2">{review.date}</td>
-            <td className="border px-4 py-2 space-x-2">
-              <button
-                onClick={() => openEditModal(review)}
-                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() =>
-                  Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'You won’t be able to revert this!',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      deleteMutation.mutate(review._id);
-                    }
-                  })
-                }
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </td>
+    {reviews.length === 0 ? (
+      <div className="flex justify-center items-center py-16">
+        <div className="bg-gradient-to-br from-white via-blue-50 to-purple-50 border border-purple-200 rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
+          <h3 className="text-2xl font-bold text-purple-700 mb-2">No Reviews Yet</h3>
+          <p className="text-blue-700 mb-4">You haven't posted any reviews. Once you review a scholarship, it will show up here!</p>
+          <span className="text-4xl">📝</span>
+        </div>
+      </div>
+    ) : (
+      <table className="table-auto w-full border rounded shadow text-black">
+        <thead className="bg-gray-200">
+          <tr>
+            <th className="px-4 py-2">Scholarship</th>
+            <th className="px-4 py-2">University</th>
+            <th className="px-4 py-2">Comment</th>
+            <th className="px-4 py-2">Date</th>
+            <th className="px-4 py-2">Actions</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {reviews.map((review) => (
+            <tr key={review._id} className="text-center text-black">
+              <td className="border px-4 py-2">{review.scholarshipName}</td>
+              <td className="border px-4 py-2">{review.universityName}</td>
+              <td className="border px-4 py-2">{review.comment}</td>
+              <td className="border px-4 py-2">{review.date}</td>
+              <td className="border px-4 py-2 space-x-2">
+                <button
+                  onClick={() => openEditModal(review)}
+                  className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() =>
+                    Swal.fire({
+                      title: 'Are you sure?',
+                      text: 'You won’t be able to revert this!',
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonText: 'Yes, delete it!',
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        deleteMutation.mutate(review._id);
+                      }
+                    })
+                  }
+                  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )}
   </div>
 
   {/* Edit Modal - Professional Design */}

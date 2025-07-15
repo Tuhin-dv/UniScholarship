@@ -84,7 +84,7 @@ const DashboardHome = () => {
                   </svg>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 leading-tight">
-                  Welcome back,
+                  Welcome to Your Dashboard,
                   <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
                     {user?.displayName || user?.name || "User"}!
                   </span>

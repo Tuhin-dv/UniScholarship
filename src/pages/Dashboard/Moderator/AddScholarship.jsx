@@ -71,15 +71,15 @@ const AddScholarship = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-gray-900 py-16 px-4">
-      <div className="max-w-5xl mx-auto bg-white/10 backdrop-blur-sm rounded-xl p-10 shadow-2xl border border-white/20">
-        <h2 className="text-4xl font-bold text-center text-white mb-10 drop-shadow-md">
+    <div className="min-h-screen  bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100   py-16 px-4">
+      <div className="max-w-5xl mx-auto bg-white/10 backdrop-blur-sm rounded-xl p-10 shadow-2xl  border-white/20">
+        <h2 className="text-4xl font-bold text-center  text-rose-700 mb-10 drop-shadow-md">
           🎓 Add Scholarship
         </h2>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1  md:grid-cols-2 gap-6"
         >
           <input
             type="hidden"
@@ -89,44 +89,44 @@ const AddScholarship = () => {
 
           <input
             {...register("scholarshipName", { required: true })}
-            className="input input-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 py-3 focus:border-purple-500 focus:ring-0 text-lg text-black"
             placeholder="Scholarship Name"
           />
 
           <input
             {...register("universityName", { required: true })}
-            className="input input-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 py-3 focus:border-purple-500 focus:ring-0 text-lg text-black"
             placeholder="University Name"
           />
 
           <input
             type="file"
             {...register("universityImage", { required: true })}
-            className="file-input file-input-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 py-3 file-input file-input-bordered text-black"
           />
 
           <input
             {...register("country", { required: true })}
-            className="input text-white input-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 py-3 focus:border-purple-500 focus:ring-0 text-lg"
             placeholder="Country"
           />
 
           <input
             {...register("city", { required: true })}
-            className="input input-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 py-3 focus:border-purple-500 focus:ring-0 text-lg"
             placeholder="City"
           />
 
           <input
             type="number"
             {...register("universityRank", { required: true })}
-            className="input input-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 py-3 focus:border-purple-500 focus:ring-0 text-lg"
             placeholder="World Rank"
           />
 
           <select
             {...register("subjectCategory", { required: true })}
-            className="select select-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 text-black px-4 py-3 focus:border-purple-500 focus:ring-0 text-lg"
           >
             <option value="">Select Subject</option>
             <option value="Agriculture">Agriculture</option>
@@ -136,7 +136,7 @@ const AddScholarship = () => {
 
           <select
             {...register("scholarshipCategory", { required: true })}
-            className="select select-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 text-black py-3 focus:border-purple-500 focus:ring-0 text-lg"
           >
             <option value="">Select Scholarship Type</option>
             <option value="Full fund">Full fund</option>
@@ -146,7 +146,7 @@ const AddScholarship = () => {
 
           <select
             {...register("degree", { required: true })}
-            className="select select-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 text-black px-4 py-3 focus:border-purple-500 focus:ring-0 text-lg"
           >
             <option value="">Select Degree</option>
             <option value="Diploma">Diploma</option>
@@ -157,43 +157,43 @@ const AddScholarship = () => {
           <input
             type="number"
             {...register("tuitionFees")}
-            className="input input-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 py-3 text-black focus:border-purple-500 focus:ring-0 text-lg"
             placeholder="Tuition Fees (Optional)"
           />
 
           <input
             type="number"
             {...register("applicationFees", { required: true })}
-            className="input input-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 py-3 text-black focus:border-purple-500 focus:ring-0 text-lg"
             placeholder="Application Fees"
           />
 
           <input
             type="number"
             {...register("serviceCharge", { required: true })}
-            className="input input-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 text-black py-3 focus:border-purple-500 focus:ring-0 text-lg"
             placeholder="Service Charge"
           />
 
           <input
             type="date"
             {...register("deadline", { required: true })}
-            className="input input-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 py-3 text-black focus:border-purple-500 focus:ring-0 text-lg"
           />
 
           <input
             type="date"
             {...register("postDate", { required: true })}
-            className="input input-bordered w-full "
+            className="w-full rounded-xl bg-white border border-gray-200 px-4 py-3 text-black focus:border-purple-500 focus:ring-0 text-lg"
           />
 
           <div className="md:col-span-2">
             <button
               type="submit"
               disabled={isPending}
-              className="btn w-full py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold text-lg hover:scale-[1.02] transition-transform duration-200"
+              className="btn w-full py-6 bg-gradient-to-r from-pink-700 to-rose-900 text-white font-semibold text-lg hover:scale-[1.02] transition-transform duration-200"
             >
-              {isPending ? "Posting..." : "🚀 Add Scholarship"}
+              {isPending ? "Posting..." : "Add Scholarship"}
             </button>
           </div>
         </form>

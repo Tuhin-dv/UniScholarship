@@ -8,7 +8,7 @@ const AllAppliedScholarships = () => {
   const [selectedApp, setSelectedApp] = useState(null);
   const [feedbackText, setFeedbackText] = useState('');
 
-  const { data: applications = [], refetch } = useQuery({
+  const { data: applications = [], refetch, isLoading } = useQuery({
     queryKey: ['all-applications'],
     queryFn: async () => {
       const res = await axiosSecure.get('/applications');
@@ -45,10 +45,26 @@ const AllAppliedScholarships = () => {
     refetch();
   };
 
-  return (
-    <div className="p-4 md:p-6">
-      <h2 className="text-xl md:text-2xl text-black font-bold mb-4">All Applied Scholarships</h2>
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+        <div className="flex flex-col items-center space-y-6">
+          <div className="relative">
+            <div className="w-16 h-16 border-4 border-purple-200 rounded-full animate-spin border-t-purple-600"></div>
+            <div className="w-12 h-12 border-4 border-blue-200 rounded-full animate-spin border-t-blue-600 absolute top-2 left-2 animate-reverse"></div>
+          </div>
+          <div className="text-center">
+            <h3 className="text-xl font-bold text-gray-800 mb-2">Loading Applications</h3>
+            <p className="text-gray-600">Please wait while we fetch all applied scholarships...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
+  return (
+    <div className=" md:p-6 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-6">
+      <h2 className="text-xl md:text-2xl text-black font-bold mb-4">All Applied Scholarships</h2>
       <div className="overflow-x-auto">
         <table className="min-w-[400px] w-full border-separate border-spacing-0 rounded-xl shadow-xl bg-white text-xs md:text-base">
           <thead className="bg-gradient-to-r from-purple-200 to-indigo-200">

@@ -24,9 +24,29 @@ const MyProfile = () => {
     }
   }, [user, axiosSecure]);
 
-  if (loading) {
-    return <div className="text-center py-10 text-lg font-medium">Loading profile...</div>;
-  }
+if (loading)
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-6 flex items-center justify-center">
+                <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full">
+                    <div className="flex flex-col items-center space-y-6">
+                        {/* Animated Loading Spinner */}
+                        <div className="relative">
+                            <div className="w-16 h-16 border-4 border-purple-200 rounded-full animate-spin border-t-purple-600"></div>
+                            <div className="w-12 h-12 border-4 border-blue-200 rounded-full animate-spin border-t-blue-600 absolute top-2 left-2 animate-reverse"></div>
+                        </div>
+                        <div className="text-center">
+                            <h3 className="text-xl font-bold text-gray-800 mb-2">
+                                Loading Applications
+                            </h3>
+                            <p className="text-gray-600">
+                                Please wait while we fetch your applications...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
 
   if (!userInfo) {
     return <div className="text-center py-10 text-red-600">User data not found!</div>;

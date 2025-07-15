@@ -1,3 +1,4 @@
+import { updateProfile } from "firebase/auth"; // make sure this is imported
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -28,17 +29,25 @@ const Register = () => {
     watch,
   } = useForm();
 
+
   const onSubmit = async (data) => {
     setIsLoading(true);
 
     try {
       const result = await createUser(data.email, data.password);
+
+      // 🛠️ Update Firebase profile with name
+      await updateProfile(result.user, {
+        displayName: data.name,
+        photoURL: "",
+      });
+
       const createdUser = result.user;
 
       const userInfo = {
-        name: createdUser.displayName || data.name,
+        name: data.name, // now this will work
         email: createdUser.email,
-        photoURL: createdUser.photoURL || "",
+        photoURL: "",
         role: "user",
         createdAt: new Date().toISOString(),
         lastLogIn: new Date().toISOString(),
@@ -59,6 +68,7 @@ const Register = () => {
       setIsLoading(false);
     }
   };
+
 
   const handleGoogleLogin = async () => {
     setIsGoogleLoading(true);

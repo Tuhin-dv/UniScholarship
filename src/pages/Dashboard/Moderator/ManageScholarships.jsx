@@ -205,7 +205,7 @@ const ManageScholarships = () => {
         ) : (
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
             {/* Table Header */}
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-4">
+            <div className="bg-gradient-to-r from-rose-800 to-pink-600 px-6 py-4">
               <h3 className="text-xl font-bold text-white">
                 Scholarship Management Table
               </h3>
@@ -455,7 +455,7 @@ const ManageScholarships = () => {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl w-full max-w-2xl shadow-2xl overflow-hidden transform transition-all duration-300 scale-100">
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-6 text-white relative">
+            <div className="bg-gradient-to-r from-rose-800 to-pink-600 p-6 text-white relative">
               <button
                 onClick={() => setShowEditModal(false)}
                 className="absolute top-4 right-4 w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300"
@@ -595,7 +595,7 @@ const ManageScholarships = () => {
                 </button>
                 <button
                   onClick={handleUpdate}
-                  className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105"
+                  className="flex-1 px-6 py-3 bg-gradient-to-r from-rose-700 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-rose-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
                 >
                   Save Changes
                 </button>

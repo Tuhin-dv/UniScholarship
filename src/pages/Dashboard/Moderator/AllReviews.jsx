@@ -59,61 +59,63 @@ function AllReviews() {
     );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold text-center text-indigo-800 mb-12">
-        All Reviews
-      </h2>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-6 ">
+      <div className='max-w-7xl mx-auto py-12'>
+        <h2 className="text-3xl font-bold text-center text-indigo-800 mb-12">
+          All Reviews
+        </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {reviews.map((review) => (
-          <div
-            key={review._id}
-            className="bg-gradient-to-br from-sky-200 via-white to-purple-200 backdrop-blur-md border border-slate-200 rounded-3xl shadow-lg p-6 relative hover:shadow-2xl transition-all duration-300"
-          >
-            {/* University Info */}
-            <h3 className="text-xl font-bold text-indigo-600 mb-1">
-              {review.universityName}
-            </h3>
-            <p className="text-sm text-slate-500 mb-3">
-              Subject: {review.subjectCategory}
-            </p>
-
-            {/* Reviewer Info */}
-            <div className="flex items-center mb-4">
-              <img
-                src={review.userImage || 'https://i.ibb.co/9cF7QJQ/user.png'}
-                alt="Reviewer"
-                className="w-12 h-12 rounded-full object-cover mr-4 border border-slate-300 shadow-sm"
-              />
-              <div>
-                <p className="text-slate-800 font-semibold">{review.userName}</p>
-                <p className="text-sm text-slate-500">{review.reviewDate}</p>
-              </div>
-            </div>
-
-            {/* Rating */}
-            <div className="mb-3">
-              <div className="flex items-center gap-1 text-yellow-500 text-lg font-semibold">
-                {'⭐'.repeat(Math.round(review.rating))}{' '}
-                <span className="ml-1 text-sm text-slate-600">({review.rating})</span>
-              </div>
-            </div>
-
-            {/* Comment */}
-            <p className="text-slate-700 italic border-l-4 border-indigo-300 pl-3">
-              "{review.comment}"
-            </p>
-
-            {/* Delete Button */}
-            <button
-              onClick={() => handleDelete(review._id)}
-              className="absolute bottom-4 right-4 text-red-500 font-medium hover:underline hover:scale-105 transition"
-              title="Delete this review"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {reviews.map((review) => (
+            <div
+              key={review._id}
+              className="bg-white backdrop-blur-md border border-slate-200 rounded-xl shadow-lg p-6 relative hover:shadow-2xl transition-all duration-300"
             >
-              🗑 Delete
-            </button>
-          </div>
-        ))}
+              {/* University Info */}
+              <h3 className="text-xl font-bold text-indigo-600 mb-1">
+                {review.universityName}
+              </h3>
+              <p className="text-sm text-slate-500 mb-3">
+                Subject: {review.subjectCategory}
+              </p>
+
+              {/* Reviewer Info */}
+              <div className="flex items-center mb-4">
+                <img
+                  src={review.userImage || 'https://i.ibb.co/9cF7QJQ/user.png'}
+                  alt="Reviewer"
+                  className="w-12 h-12 rounded-full object-cover mr-4 border border-slate-300 shadow-sm"
+                />
+                <div>
+                  <p className="text-slate-800 font-semibold">{review.userName}</p>
+                  <p className="text-sm text-slate-500">{review.reviewDate}</p>
+                </div>
+              </div>
+
+              {/* Rating */}
+              <div className="mb-3">
+                <div className="flex items-center gap-1 text-yellow-500 text-lg font-semibold">
+                  {'⭐'.repeat(Math.round(review.rating))}{' '}
+                  <span className="ml-1 text-sm text-slate-600">({review.rating})</span>
+                </div>
+              </div>
+
+              {/* Comment */}
+              <p className="text-slate-700 italic border-l-4 border-indigo-300 pl-3">
+                "{review.comment}"
+              </p>
+
+              {/* Delete Button */}
+              <button
+                onClick={() => handleDelete(review._id)}
+                className="absolute bottom-4 right-4 text-red-500 font-medium hover:underline hover:scale-105 transition"
+                title="Delete this review"
+              >
+                🗑 Delete
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
