@@ -8,13 +8,15 @@ const AllAppliedScholarships = () => {
   const [selectedApp, setSelectedApp] = useState(null);
   const [feedbackText, setFeedbackText] = useState('');
 
-  const { data: applications = [], refetch, isLoading } = useQuery({
-    queryKey: ['all-applications'],
-    queryFn: async () => {
-      const res = await axiosSecure.get('/applications');
-      return res.data;
-    },
-  });
+ const { data: applications = [], refetch, isLoading } = useQuery({
+  queryKey: ['all-applications'],
+  queryFn: async () => {
+    const res = await axiosSecure.get('/applications');
+    console.log('Fetched applications:', res.data); // should log an array ✅
+    return res.data; // ✅ fix: this is the array
+  },
+});
+
 
   const handleCancel = async (id) => {
     Swal.fire({
@@ -65,16 +67,16 @@ const AllAppliedScholarships = () => {
   return (
     <div className=" md:p-6 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-6">
       <h2 className="text-xl md:text-2xl text-black font-bold mb-4">All Applied Scholarships</h2>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-lg">
         <table className="min-w-[400px] w-full border-separate border-spacing-0 rounded-xl shadow-xl bg-white text-xs md:text-base">
-          <thead className="bg-gradient-to-r from-purple-200 to-indigo-200">
+          <thead className="bg-gradient-to-br from-sky-500 to-sky-700">
             <tr>
               {/* Name column removed */}
-              <th className="p-2 md:p-4 font-bold text-slate-700">University</th>
-              <th className="p-2 md:p-4 font-bold text-slate-700">Degree</th>
-              <th className="p-2 md:p-4 font-bold text-slate-700">Category</th>
-              <th className="p-2 md:p-4 font-bold text-slate-700">Status</th>
-              <th className="p-2 md:p-4 font-bold text-slate-700">Actions</th>
+              <th className="p-2 md:p-4 font-bold text-white">University</th>
+              <th className="p-2 md:p-4 font-bold text-white">Degree</th>
+              <th className="p-2 md:p-4 font-bold text-white">Category</th>
+              <th className="p-2 md:p-4 font-bold text-white">Status</th>
+              <th className="p-2 md:p-4 font-bold text-white">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -101,7 +103,7 @@ const AllAppliedScholarships = () => {
                 </td>
                 <td className="p-2 md:p-4 space-x-1 md:space-x-2 align-middle">
                   <button
-                    className="px-2 md:px-4 py-1 md:py-1.5 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold shadow hover:scale-105 transition-transform text-xs md:text-base"
+                    className="px-2 md:px-4 py-1 md:py-1.5 rounded-lg bg-gradient-to-br from-sky-500 to-sky-700 text-white font-semibold shadow hover:scale-105 transition-transform text-xs md:text-base"
                     onClick={() => setSelectedApp(app)}
                   >
                     Details

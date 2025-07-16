@@ -202,7 +202,7 @@ const Testimonials = () => {
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-6 z-20">
             <button
               onClick={prevSlide}
-              className="group w-14 h-14 bg-gradient-to-r from-rose-700 to-pink-500 rounded-full shadow-xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
+              className="group w-14 h-14 bg-gradient-to-br from-sky-500 to-sky-700  rounded-full shadow-xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
             >
               <svg
                 className="w-6 h-6 text-white group-hover:scale-125 transition-transform duration-300"
@@ -216,7 +216,7 @@ const Testimonials = () => {
 
             <button
               onClick={nextSlide}
-              className="group w-14 h-14 bg-gradient-to-r from-pink-500 to-rose-700 rounded-full shadow-xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
+              className="group w-14 h-14 bg-gradient-to-br from-sky-700 to-sky-500 rounded-full shadow-xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
             >
               <svg
                 className="w-6 h-6 text-white group-hover:scale-125 transition-transform duration-300"
@@ -242,7 +242,7 @@ const Testimonials = () => {
                 setTimeout(() => setAutoPlay(true), 10000);
               }}
               className={`transition-all duration-300 rounded-full ${index === current
-                  ? "w-12 h-3 bg-gradient-to-r from-rose-700 to-pink-500 shadow-lg"
+                  ? "w-12 h-3 bg-gradient-to-br from-sky-500 to-sky-700 shadow-lg"
                   : "w-3 h-3 bg-gray-600 hover:bg-gray-500"
                 }`}
             />
@@ -335,11 +335,11 @@ const Testimonials = () => {
 const TestimonialCard = ({ data, isActive }) => {
   return (
     <div
-      className={`relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-[#990f2d54] rounded-3xl p-8 shadow-2xl transition-all duration-700 ${isActive ? "shadow-purple-500/30" : "shadow-black/20"
+      className={`relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-sky-300 rounded-3xl p-8 shadow-2xl transition-all duration-700 ${isActive ? "shadow-purple-500/30" : "shadow-black/20"
         }`}
     >
       {/* Quote Icon */}
-      <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-pink-700 to-rose-700 rounded-full flex items-center justify-center shadow-xl">
+      <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-sky-500 to-sky-700 rounded-full flex items-center justify-center shadow-xl">
         <svg
           className="w-6 h-6 text-white"
           fill="currentColor"

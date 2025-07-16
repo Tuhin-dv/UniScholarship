@@ -11,14 +11,15 @@ const ManageScholarships = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterBy, setFilterBy] = useState("all");
 
-  // fetch all scholarships
-  const { data: scholarships = [], refetch } = useQuery({
-    queryKey: ["scholarships"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/scholarships");
-      return res.data;
-    },
-  });
+ const { data: scholarships = [], refetch } = useQuery({
+  queryKey: ["scholarships"],
+  queryFn: async () => {
+    const res = await axiosSecure.get("/scholarships");
+    
+    return res.data.scholarships; // ✅ fix here
+  },
+});
+
 
   // Filter scholarships
   const filteredScholarships = scholarships.filter((scholarship) => {
@@ -205,7 +206,7 @@ const ManageScholarships = () => {
         ) : (
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
             {/* Table Header */}
-            <div className="bg-gradient-to-r from-rose-800 to-pink-600 px-6 py-4">
+            <div className="bg-gradient-to-br from-sky-500 to-sky-700 px-6 py-4">
               <h3 className="text-xl font-bold text-white">
                 Scholarship Management Table
               </h3>
@@ -382,7 +383,7 @@ const ManageScholarships = () => {
                         <div className="flex items-center justify-center space-x-3">
                           <button
                             onClick={() => openEditModal(scholarship)}
-                            className="group/btn relative bg-gradient-to-r from-yellow-500 to-orange-500 text-white p-3 rounded-xl shadow-lg hover:shadow-xl hover:from-yellow-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-110"
+                            className="group/btn relative bg-gradient-to-br from-sky-500 to-sky-700 text-white p-3 rounded-xl shadow-lg hover:shadow-xl hover:from-yellow-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-110"
                             title="Edit Scholarship"
                           >
                             <svg
@@ -532,7 +533,7 @@ const ManageScholarships = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-gray-700 uppercase tracking-wide">
                     Subject Category
-                  </label>
+                  </label> 
                   <input
                     type="text"
                     value={selectedScholarship.subjectCategory}

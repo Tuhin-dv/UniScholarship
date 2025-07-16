@@ -73,7 +73,7 @@ const AddScholarship = () => {
   return (
     <div className="min-h-screen  bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100   py-16 px-4">
       <div className="max-w-5xl mx-auto bg-white/10 backdrop-blur-sm rounded-xl p-10 shadow-2xl  border-white/20">
-        <h2 className="text-4xl font-bold text-center  text-rose-700 mb-10 drop-shadow-md">
+        <h2 className="text-4xl font-bold text-center  text-sky-500 mb-10 drop-shadow-md">
           🎓 Add Scholarship
         </h2>
 
@@ -191,7 +191,7 @@ const AddScholarship = () => {
             <button
               type="submit"
               disabled={isPending}
-              className="btn w-full py-6 bg-gradient-to-r from-pink-700 to-rose-900 text-white font-semibold text-lg hover:scale-[1.02] transition-transform duration-200"
+              className="btn w-full py-6 bg-gradient-to-br from-sky-500 border-sky-500 to-sky-700 text-white font-semibold text-lg hover:scale-[1.02] transition-transform duration-200"
             >
               {isPending ? "Posting..." : "Add Scholarship"}
             </button>

@@ -30,8 +30,22 @@ const steps = [
 
 const HowItWorks = () => {
     return (
-        <section className="relative bg-gradient-to-br from-rose-900 via-rose-800 to-pink-900 text-white py-24 overflow-hidden">
+        <section className="bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700 relative text-white py-24 overflow-hidden">
+            <div className="absolute inset-0">
+                <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full"></div>
+                <div className="absolute top-32 right-16 w-16 h-16 bg-white/10 rounded-full"></div>
+                <div className="absolute bottom-20 left-20 w-24 h-24 bg-white/10 rounded-full"></div>
+                <div className="absolute bottom-32 right-10 w-12 h-12 bg-white/10 rounded-full"></div>
 
+                {/* Grid Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                    <div className="grid grid-cols-8 grid-rows-8 h-full">
+                        {Array.from({ length: 64 }).map((_, i) => (
+                            <div key={i} className="border border-white/20"></div>
+                        ))}
+                    </div>
+                </div>
+            </div>
 
             {/* Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden">

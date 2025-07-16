@@ -20,7 +20,7 @@ export default function AuthLayout() {
 
                         {/* Image/Illustration Side */}
                         <div className="hidden lg:flex items-center justify-center bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700 relative overflow-hidden">
-                            {/* Decorative Elements */}
+                            {/* Decorative Elements */}     
                             <div className="absolute inset-0">
                                 <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full"></div>
                                 <div className="absolute top-32 right-16 w-16 h-16 bg-white/10 rounded-full"></div>

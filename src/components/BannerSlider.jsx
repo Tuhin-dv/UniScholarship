@@ -17,7 +17,7 @@ const BannerSlider = () => {
       "Discover thousands of scholarship opportunities tailored to your academic profile. Start your journey towards higher education without financial barriers.",
     buttonText: "Get Started",
     stats: "10,000+ Students Helped",
-    bgGradient: "from-rose-900 via-pink-900 to-purple-900", // ✨ Smooth and academic
+    bgGradient: "bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700", // ✨ Smooth and academic
     illustration: img1,
   },
   {
@@ -28,7 +28,7 @@ const BannerSlider = () => {
       "Explore international scholarship programs from top universities worldwide. Transform your future with world-class education and cultural experiences.",
     buttonText: "Explore Now",
     stats: "50+ Countries Available",
-  bgGradient: "from-rose-900 via-pink-900 to-purple-900", // ✨ Elegant and global
+  bgGradient: "bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700", // ✨ Elegant and global
     illustration: img2,
   },
   {
@@ -39,7 +39,7 @@ const BannerSlider = () => {
       "Be part of thousands of successful scholarship recipients who achieved their dreams. Your success story starts here with the right guidance and support.",
     buttonText: "Join Now",
     stats: "95% Success Rate",
-    bgGradient: "from-rose-900 via-pink-900 to-purple-900", // ✨ Inspirational and warm
+    bgGradient: "bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700", // ✨ Inspirational and warm
     illustration: img3,
   },
 ];
@@ -68,7 +68,8 @@ const BannerSlider = () => {
   setCurrentSlide(index)
 }
   return (
-    <div className="relative w-full h-[700px] lg:h-[700px] overflow-hidden bg-white shadow-2xl">
+    <div className="relative w-full min-h-screen lg:h-[700px] overflow-hidden bg-white shadow-2xl">
+      
       {/* Slides Container */}
       <div
         className="flex transition-transform duration-1000 ease-out h-full"
@@ -93,7 +94,7 @@ const BannerSlider = () => {
               ></div>
             </div>
 
-            <div className="relative z-10 max-w-[1700px] mx-auto px-6 sm:px-8 lg:px-12 h-full">
+            <div className="relative z-10 max-w-[1780px] mx-auto px-6 sm:px-8 lg:px-12 h-full">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center h-full">
                 {/* Left Side - Text Content */}
                 <div className="space-y-8 text-left">
@@ -116,7 +117,7 @@ const BannerSlider = () => {
 
                   {/* CTA Section */}
                   <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                    <button className="group inline-flex items-center justify-center gap-3 bg-[linear-gradient(to_right,_#990f2d,_#b01c50)] text-white px-10 py-5 rounded-2xl font-bold text-lg hover:from-orange-600 hover:to-red-600 transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-orange-500/25 border border-orange-400/20">
+                    <button className="group inline-flex items-center justify-center gap-3 bg-sky-500 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:from-orange-600 hover:to-red-600 transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-orange-500/25 border border-orange-400/20">
                       {slide.buttonText}
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                     </button>
@@ -161,12 +162,7 @@ const BannerSlider = () => {
                       </div>
                     </div>
 
-                    <div className="absolute top-1/4 -right-12 w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center animate-ping shadow-2xl border border-yellow-300/20">
-                      <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
-                        <span className="text-lg">⭐</span>
-                      </div>
-                    </div>
-
+                  
                     {/* Additional Decorative Elements */}
                     <div
                       className="absolute top-3/4 -left-4 w-12 h-12 bg-gradient-to-br from-green-400 to-teal-500 rounded-2xl flex items-center justify-center animate-bounce shadow-xl border border-green-300/20"
@@ -218,7 +214,7 @@ const BannerSlider = () => {
             onClick={() => goToSlide(index)}
             className={`transition-all duration-300 ${
               index === currentSlide
-                ? "w-8 h-2 bg-orange-400 rounded-full shadow-lg"
+                ? "w-8 h-2 bg-sky-300 rounded-full shadow-lg"
                 : "w-2 h-2 bg-white/50 hover:bg-white/75 rounded-full hover:scale-125"
             }`}
             aria-label={`Go to slide ${index + 1}`}
@@ -232,7 +228,7 @@ const BannerSlider = () => {
       {/* Enhanced Progress Bar */}
       <div className="absolute bottom-0 left-0 w-full h-1 bg-white/10">
         <div
-          className="h-full bg-gradient-to-r from-orange-400 to-red-500 transition-all duration-1000 ease-linear shadow-lg"
+          className="h-full bg-gradient-to-r from-sky-400 to-sky-200 transition-all duration-1000 ease-linear shadow-lg"
           style={{
             width: `${((currentSlide + 1) / slides.length) * 100}%`,
           }}

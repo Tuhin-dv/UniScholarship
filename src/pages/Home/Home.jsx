@@ -118,7 +118,7 @@ function Home() {
 
                   {/* CTA */}
                   <div className="text-center pt-16">
-                    <div className="border-[#990f2d] border-b-8 border-l-8 bg-gradient-to-tr from-rose-900 via-pink-900 to-purple-900 rounded-3xl p-8 md:p-12 shadow-2xl">
+                    <div className="border-sky-500 border-b-8 border-l-8 bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700 relative rounded-3xl p-8 md:p-12 shadow-2xl">
                       <div className="max-w-3xl mx-auto text-white">
                         <h3 className="text-3xl md:text-4xl font-bold mb-4">
                           Ready to Start Your Journey?
@@ -129,7 +129,7 @@ function Home() {
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                           <Link to="/all-scholarships">
-                            <button className="bg-white text-[#990f2d] px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                            <button className="bg-white text-sky-600 px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                               Browse All Scholarships
                             </button>
                           </Link>
@@ -150,12 +150,13 @@ function Home() {
             <div className="absolute bottom-20 left-1/4 w-3 h-3 bg-pink-400 rounded-full opacity-25 animate-bounce animation-delay-300"></div>
             <div className="absolute bottom-40 right-1/3 w-5 h-5 bg-indigo-400 rounded-full opacity-20 animate-bounce animation-delay-150"></div>
           </section>
+          <div className=" py-16">
+            <TeacherSection />
+          </div>
         </div>
 
         {/* Other Sections */}
-        <div className="bg-orange-50 py-16">
-          <TeacherSection />
-        </div>
+
         <HowItWorks />
         <Testimonials />
       </div>

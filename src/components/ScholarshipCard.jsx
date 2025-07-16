@@ -224,7 +224,7 @@ const  ScholarshipCard = ({ scholarship }) => {
         {/* Action Button */}
         <Link
           to={`/scholarship/${_id}`}
-          className="group/btn w-full inline-flex items-center justify-center bg-gradient-to-t from-rose-800 to-pink-700 px-6 py-3 text-white border border-[#990f2d] font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105"
+          className="group/btn w-full inline-flex items-center justify-center bg-gradient-to-br from-sky-500 to-sky-700  px-6 py-3 text-white border border-sky-700 font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-sky-600 hover:to-sky-600 transition-all duration-300 transform hover:scale-105"
         >
           <span className="flex items-center">
             View Details

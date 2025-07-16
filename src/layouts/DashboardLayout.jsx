@@ -187,7 +187,7 @@ const DashboardLayout = () => {
           </button>
 
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-rose-700 to-pink-700 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-sky-500 to-sky-700 rounded-lg flex items-center justify-center">
               <FaHome className="w-4 h-4 text-white" />
             </div>
             <h1 className="text-xl font-bold text-gray-900">Dashboard</h1>
@@ -229,7 +229,7 @@ const DashboardLayout = () => {
             <div className="flex items-center justify-between">
               <Link to="/">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-white/20 text-rose-700 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                  <div className="w-12 h-12 bg-white/20 text-sky-500 rounded-xl flex items-center justify-center backdrop-blur-sm">
                     <FaGraduationCap size={28} />
                   </div>
                   <div className="flex items-center space-x-2 text-black font-extrabold text-2xl transition">
@@ -258,7 +258,7 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `group relative flex items-center space-x-4 p-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] ${
                         isActive
-                          ? " border-b-4 border-rose-700  text-black shadow-lg"
+                          ? " border-b-4 border-sky-500  text-black shadow-lg"
                           : `hover:${item.bgColor} text-gray-700 font-bold hover:${item.color} hover:shadow-md`
                       }`
                     }
@@ -268,7 +268,7 @@ const DashboardLayout = () => {
                         <div
                           className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 ${
                             isActive
-                              ? "bg-white/70 text-rose-700"
+                              ? "bg-white/70 text-sky-500"
                               : `${item.bgColor} ${item.color} group-hover:scale-110`
                           }`}
                         >
@@ -315,7 +315,7 @@ const DashboardLayout = () => {
             <div className="px-8 py-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 bg-gradient-to-r from-rose-700 to-pink-700 rounded-xl flex items-center justify-center">
+                  <div className="w-10 h-10 bg-gradient-to-br from-sky-500 to-sky-700 rounded-xl flex items-center justify-center">
                     <FaHome className="w-5 h-5 text-white" />
                   </div>
                   <div>

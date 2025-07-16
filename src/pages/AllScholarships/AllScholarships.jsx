@@ -91,19 +91,19 @@ function AllScholarships() {
   return (
     <div className="p-6 bg-orange-50">
       <div className="max-w-[1400px] mx-auto">
-        <div className="flex bg-white p-4 justify-between flex-col md:flex-row items-center gap-4 mb-8">
+        <div className="flex bg-white p-4 rounded-full justify-between flex-col md:flex-row items-center gap-4 mb-8">
           <input
             type="text"
             placeholder="Search by university or category..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border px-4 py-2 text-black bg-white focus:border-purple-500 rounded-md w-full md:w-1/2"
+            className="border rounded-full px-4 py-2 text-black bg-white focus:border-purple-500  w-full md:w-1/2"
           />
 
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="border px-8 py-2 bg-white text-black rounded-md"
+            className="border rounded-full px-8 py-2 bg-white text-black"
           >
             <option value="all">All Categories</option>
             {categories.map((cat, idx) => (
@@ -114,7 +114,7 @@ function AllScholarships() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="border px-8 py-2 bg-white text-black rounded-md"
+            className="border px-8 py-2 bg-white text-black rounded-full"
           >
             <option value="name">Sort by Name</option>
             <option value="fees-low">Fees (Low to High)</option>

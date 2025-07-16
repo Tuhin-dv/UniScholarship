@@ -49,7 +49,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
               isActive
-                ? "border-b-4 border-[#990f2d] text-[#990f2d] "
+                ? "border-b-4 border-sky-500 text-sky-700 "
                 : "text-gray-700 hover:text-purple-600 hover:bg-purple-50"
             }`
           }
@@ -64,7 +64,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
               isActive
-                ? "border-b-4 border-[#990f2d] text-[#990f2d] "
+                ? "border-b-4 border-sky-500 text-sky-700 "
                 : "text-gray-700 hover:text-purple-600 hover:bg-purple-50"
             }`
           }
@@ -79,7 +79,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
               isActive
-                ? "border-b-4 border-[#990f2d] text-[#990f2d] "
+                ? "border-b-4 border-sky-500 text-sky-700 "
                 : "text-gray-700 hover:text-purple-600 hover:bg-purple-50"
             }`
           }
@@ -112,7 +112,7 @@ const Navbar = () => {
             className="flex items-center space-x-3 group transition-all duration-300 transform hover:scale-105"
           >
             <div className="relative">
-              <div className="w-12 h-12 bg-[#990f2d] rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+              <div className="w-12 h-12 bg-sky-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
                 <FaGraduationCap className="text-white text-xl group-hover:scale-110 transition-transform duration-300" />
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-300 -z-10"></div>
@@ -137,7 +137,7 @@ const Navbar = () => {
                 onClick={() => setUserModalOpen(true)}
                 className="flex items-center space-x-3 p-2 rounded-xl hover:bg-purple-50 transition-all duration-300 transform hover:scale-105 group"
               >
-                <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg group-hover:shadow-xl transition-all duration-300">
+                <div className="w-10 h-10 bg-sky-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg group-hover:shadow-xl transition-all duration-300">
                   {user?.displayName?.charAt(0) ||
                     user.email?.charAt(0) ||
                     "U"}
