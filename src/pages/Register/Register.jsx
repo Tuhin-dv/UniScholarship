@@ -56,7 +56,7 @@ const Register = () => {
       const res = await axiosSecure.post("/users", userInfo);
 
       if (res.status === 200 || res.status === 201) {
-        toast.success("Account created and saved to DB! 🎉");
+        toast.success("Account created Successfully! 🎉");
         navigate("/");
       } else {
         toast.error("User created but failed to save in DB.");

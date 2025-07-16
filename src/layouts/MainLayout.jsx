@@ -8,7 +8,9 @@ function MainLayout() {
     <div>
       <Navbar />
       <Outlet />
-      <Footer></Footer>
+      <div className='bg-orange-50'>
+        <Footer></Footer>
+      </div>
     </div>
   );
 }

@@ -90,7 +90,7 @@ function AllScholarships() {
 
   return (
     <div className="p-6 bg-orange-50">
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1700px] mx-auto">
         <div className="flex bg-white p-4 rounded-full justify-between flex-col md:flex-row items-center gap-4 mb-8">
           <input
             type="text"

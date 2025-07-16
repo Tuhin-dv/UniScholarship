@@ -35,7 +35,7 @@ function Home() {
             <div className="max-w-[1700px] mx-auto relative z-10">
               {/* Section Header */}
               <div className="text-center mb-16 space-y-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-rose-700 to-pink-700 rounded-2xl mb-6 shadow-lg">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-sky-500 to-sky-700 rounded-2xl mb-6 shadow-lg">
                   <svg
                     className="w-8 h-8 text-white"
                     fill="currentColor"
@@ -51,7 +51,7 @@ function Home() {
 
                 <div>
                   <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-                    <span className="text-rose-900">Top Scholarships</span>
+                    <span className="text-sky-500">Top Scholarships</span>
                   </h2>
                   <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                     Discover the most affordable and prestigious scholarship

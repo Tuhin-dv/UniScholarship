@@ -12,7 +12,7 @@ import {
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
-import useAxios from "../../hooks/useAxios"; // ✅ axios hook import
+import useAxios from "../../hooks/useAxios"; // axios instance hooked with baseURL and interceptors
 
 const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
@@ -20,7 +20,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const navigate = useNavigate();
-  const axiosSecure = useAxios(); // ✅ axios instance
+  const axiosSecure = useAxios(); // axios instance for secure requests
 
   const {
     register,
@@ -28,11 +28,29 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  // Function to get JWT token from backend and store in localStorage
+  const fetchAndStoreJwt = async (email) => {
+    try {
+      // Call backend JWT token generation route
+      const response = await axiosSecure.post("/jwt", { email });
+      const token = response.data.token;
+      // Store token in localStorage
+      localStorage.setItem("uniScholar-token", token);
+    } catch (err) {
+      toast.error("Failed to get authorization token.");
+    }
+  };
+
+  // Handler for email/password login
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
       const result = await signIn(data.email, data.password);
       console.log("User logged in:", result.user);
+
+      // After login success, fetch JWT token & store it
+      await fetchAndStoreJwt(result.user.email);
+
       toast.success("Login successful! 🎉");
       navigate("/");
     } catch (error) {
@@ -43,12 +61,14 @@ const Login = () => {
     }
   };
 
+  // Handler for Google social login
   const handleGoogleLogin = async () => {
     setIsGoogleLoading(true);
     try {
       const result = await googleSignIn();
       const user = result.user;
 
+      // Prepare user info for database
       const userInfo = {
         name: user.displayName,
         email: user.email,
@@ -58,11 +78,14 @@ const Login = () => {
         last_log_in: new Date().toISOString(),
       };
 
-      // ✅ Check if user already exists
+      // Check if user exists, if not create new user in DB
       const checkRes = await axiosSecure.get(`/users?email=${user.email}`);
       if (!checkRes.data.exists) {
         await axiosSecure.post("/users", userInfo);
       }
+
+      // After Google login success, fetch JWT token & store it
+      await fetchAndStoreJwt(user.email);
 
       toast.success("Login successful! 🎉");
       navigate("/");
@@ -136,7 +159,7 @@ const Login = () => {
                   },
                 })}
                 placeholder="Enter your password"
-                className="w-full pl-12 pr-12 py-4 border-2 border-gray-200 rounded-xl bg-gray-50 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/20 transition-all"
+                className="w-full pl-12 pr-12 py-4 border-2 text-black border-gray-200 rounded-xl bg-gray-50 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/20 transition-all"
               />
               <button
                 type="button"
