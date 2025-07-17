@@ -63,12 +63,17 @@ const Login = () => {
 
   // Handler for Google social login
   const handleGoogleLogin = async () => {
-    setIsGoogleLoading(true);
-    try {
-      const result = await googleSignIn();
-      const user = result.user;
+  setIsGoogleLoading(true);
+  try {
+    const result = await googleSignIn();
+    const user = result.user;
 
-      // Prepare user info for database
+    // ✅ JWT Token fetch age korte hobe
+    await fetchAndStoreJwt(user.email);
+
+    // ✅ axiosSecure token set er pore use koro
+    const checkRes = await axiosSecure.get(`/users?email=${user.email}`);
+    if (!checkRes.data.exists) {
       const userInfo = {
         name: user.displayName,
         email: user.email,
@@ -77,25 +82,18 @@ const Login = () => {
         created_at: new Date().toISOString(),
         last_log_in: new Date().toISOString(),
       };
-
-      // Check if user exists, if not create new user in DB
-      const checkRes = await axiosSecure.get(`/users?email=${user.email}`);
-      if (!checkRes.data.exists) {
-        await axiosSecure.post("/users", userInfo);
-      }
-
-      // After Google login success, fetch JWT token & store it
-      await fetchAndStoreJwt(user.email);
-
-      toast.success("Login successful! 🎉");
-      navigate("/");
-    } catch (error) {
-      console.error("Google login error:", error.message);
-      toast.error("Login failed. Please try again.");
-    } finally {
-      setIsGoogleLoading(false);
+      await axiosSecure.post("/users", userInfo);
     }
-  };
+
+    toast.success("Login successful! 🎉");
+    navigate("/");
+  } catch (error) {
+    console.error("Google login error:", error.message);
+    toast.error("Login failed. Please try again.");
+  } finally {
+    setIsGoogleLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
