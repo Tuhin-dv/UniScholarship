@@ -14,7 +14,7 @@ function PaymentForm({ scholarship, onPaymentSuccess }) {
   useEffect(() => {
     if (amount > 0) {
       axios
-        .post("http://localhost:5000/create-payment-intent", { amount })
+        .post("ttps://uni-scholar-server.vercel.app/create-payment-intent", { amount })
         .then((res) => setClientSecret(res.data.clientSecret))
         .catch((err) => console.error("Error getting client secret:", err));
     }
