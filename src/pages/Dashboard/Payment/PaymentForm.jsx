@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import axios from "axios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
 
 function PaymentForm({ scholarship, onPaymentSuccess }) {
-
+ const axiosSecure = useAxiosSecure();
   const { applicationFees: amount } = scholarship;
   const stripe = useStripe();
   const elements = useElements();
@@ -13,13 +14,12 @@ function PaymentForm({ scholarship, onPaymentSuccess }) {
 
   useEffect(() => {
     if (amount > 0) {
-      axios
-        .post("https://uni-scholar-server.vercel.app/create-payment-intent", { amount })
+      axiosSecure
+        .post("/create-payment-intent", { amount })
         .then((res) => setClientSecret(res.data.clientSecret))
         .catch((err) => console.error("Error getting client secret:", err));
     }
-  }, [amount]);
-
+  }, [amount, axiosSecure]); // ✅ dependency te axiosSecure o dite hobe
   const handleSubmit = async (e) => {
     e.preventDefault();
 

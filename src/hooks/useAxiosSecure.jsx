@@ -2,8 +2,8 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "https://uni-scholar-server.vercel.app/", 
- 
+  baseURL: "https://uni-scholar-server.vercel.app",
+  withCredentials: true, // 🔥 This is IMPORTANT!
 });
 
 const useAxiosSecure = () => {
