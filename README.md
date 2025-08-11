@@ -1,23 +1,22 @@
-# 🌍 Globallearn - Online Tutor Booking Platform
+# 🎓 UniScholarship - Scholarship Management System
 
 **LiveLink:** [unischolar-5a13a.web.app](https://unischolar-5a13a.web.app)
 
-
-Globallearn is an online platform designed to connect language learners with expert tutors around the world. Users can search for tutors by language, book lessons, write reviews, and manage their tutorial bookings—all in a clean, responsive, and user-friendly interface.  
-
+UniScholarship is a full-stack scholarship management platform designed to help students find, apply for, and manage scholarship opportunities. It also includes role-based dashboards for users, moderators, and admins, enabling smooth management of applications, reviews, and scholarship listings—all in a clean, responsive, and user-friendly interface.
 
 ---
 
 ## 🚀 Features
 
 - 🔐 User Authentication (Email/Password & Google)
-- 🎯 Tutor Listings by Language Category
-- ➕ Add Tutorials (Private Route)
-- 📚 My Tutorials Management (Edit/Delete)
-- ✅ Book Tutors (Private Route)
-- 📝 Review Functionality
+- 🎓 Scholarship Listings by Category
+- 📝 Apply for Scholarships (Private Route)
+- 📚 My Applications Management (Edit/Delete/Cancel)
+- ✅ Review Functionality
+- 📊 Role-Based Dashboards (User / Moderator / Admin)
+- 💳 Stripe Payment Integration
 - 🌗 Light/Dark Theme Toggle
-- 🔎 Search Tutors by Language
+- 🔎 Search & Filter Scholarships
 - 📱 Responsive Design
 - 🧾 JWT-Based Protected Routes
 - ⚠️ 404 Error Page + Loading States
