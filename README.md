@@ -1,12 +1,54 @@
-# React + Vite
+# 🌍 Globallearn - Online Tutor Booking Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**LiveLink:** [unischolar-5a13a.web.app](https://unischolar-5a13a.web.app)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Globallearn is an online platform designed to connect language learners with expert tutors around the world. Users can search for tutors by language, book lessons, write reviews, and manage their tutorial bookings—all in a clean, responsive, and user-friendly interface.  
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Features
+
+- 🔐 User Authentication (Email/Password & Google)
+- 🎯 Tutor Listings by Language Category
+- ➕ Add Tutorials (Private Route)
+- 📚 My Tutorials Management (Edit/Delete)
+- ✅ Book Tutors (Private Route)
+- 📝 Review Functionality
+- 🌗 Light/Dark Theme Toggle
+- 🔎 Search Tutors by Language
+- 📱 Responsive Design
+- 🧾 JWT-Based Protected Routes
+- ⚠️ 404 Error Page + Loading States
+
+---
+
+## 🧪 Technologies Used
+
+### 👉 Client (Frontend)
+
+- React.js
+- React Router DOM
+- Tailwind CSS
+- ShadCN UI (Component Library)
+- Axios
+- Framer Motion (Animations)
+- React Hot Toast
+- React Icons
+
+### 🔐 Authentication
+
+- Firebase Authentication  
+  - Email & Password Login  
+  - Google Login  
+
+### 🌐 Server (Backend)
+
+- Node.js
+- Express.js
+- MongoDB + MongoDB Atlas
+- JWT (jsonwebtoken)
+- bcryptjs
+- dotenv
+- cors
