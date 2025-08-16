@@ -13,7 +13,7 @@ function Home() {
   return (
     <>
       <div>
-        <div className="min-h-screen bg-orange-50 relative overflow-hidden">
+        <div className="min-h-screen  relative overflow-hidden">
           {/* Banner Section */}
           <div className="relative">
             <BannerSlider />

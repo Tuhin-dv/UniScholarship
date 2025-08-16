@@ -13,15 +13,12 @@ function AllScholarships() {
   const [sortBy, setSortBy] = useState("name");
   const [page, setPage] = useState(1);
 
-  const {
-    data,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["scholarships", page],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/scholarships?page=${page}&limit=${limit}`);
+      const res = await axiosSecure.get(
+        `/scholarships?page=${page}&limit=${limit}`
+      );
       return res.data;
     },
     keepPreviousData: true,
@@ -37,9 +34,15 @@ function AllScholarships() {
     if (searchTerm) {
       filtered = filtered.filter(
         (scholarship) =>
-          scholarship.universityName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          scholarship.scholarshipCategory?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          scholarship.subjectCategory?.toLowerCase().includes(searchTerm.toLowerCase())
+          scholarship.universityName
+            ?.toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          scholarship.scholarshipCategory
+            ?.toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          scholarship.subjectCategory
+            ?.toLowerCase()
+            .includes(searchTerm.toLowerCase())
       );
     }
 
@@ -67,10 +70,12 @@ function AllScholarships() {
   }, [scholarships, searchTerm, selectedCategory, sortBy]);
 
   const categories = useMemo(() => {
-    return [...new Set(scholarships.map((s) => s.scholarshipCategory))].filter(Boolean);
+    return [...new Set(scholarships.map((s) => s.scholarshipCategory))].filter(
+      Boolean
+    );
   }, [scholarships]);
 
-   if (isLoading) {
+  if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
         <div className="flex flex-col items-center space-y-6">
@@ -79,42 +84,53 @@ function AllScholarships() {
             <div className="w-12 h-12 border-4 border-blue-200 rounded-full animate-spin border-t-blue-600 absolute top-2 left-2 animate-reverse"></div>
           </div>
           <div className="text-center">
-            <h3 className="text-xl font-bold text-gray-800 mb-2">Loading Applications</h3>
-            <p className="text-gray-600">Please wait while we fetch all applied scholarships...</p>
+            <h3 className="text-xl font-bold text-gray-800 mb-2">
+              Loading Applications
+            </h3>
+            <p className="text-gray-600">
+              Please wait while we fetch all applied scholarships...
+            </p>
           </div>
         </div>
       </div>
     );
   }
-  if (isError) return <p className="text-red-500 text-center mt-12">{error.message}</p>;
+  if (isError)
+    return <p className="text-red-500 text-center mt-12">{error.message}</p>;
 
   return (
-    <div className="p-6 bg-orange-50">
+    <div className="p-6 bg-sky-50">
       <div className="max-w-[1700px] mx-auto">
-        <div className="flex bg-white p-4 rounded-full justify-between flex-col md:flex-row items-center gap-4 mb-8">
+        {/* Filters */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 bg-white p-4 rounded-2xl shadow-md gap-4 mb-8">
+          {/* Search */}
           <input
             type="text"
             placeholder="Search by university or category..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border rounded-full px-4 py-2 text-black bg-white focus:border-purple-500  w-full md:w-1/2"
+            className="border rounded-xl px-4 py-2 text-black bg-white focus:border-purple-500 w-full"
           />
 
+          {/* Category */}
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="border rounded-full px-8 py-2 bg-white text-black"
+            className="border rounded-xl px-4 py-2 bg-white text-black w-full"
           >
             <option value="all">All Categories</option>
             {categories.map((cat, idx) => (
-              <option key={idx} value={cat}>{cat}</option>
+              <option key={idx} value={cat}>
+                {cat}
+              </option>
             ))}
           </select>
 
+          {/* Sorting */}
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="border px-8 py-2 bg-white text-black rounded-full"
+            className="border rounded-xl px-4 py-2 bg-white text-black w-full"
           >
             <option value="name">Sort by Name</option>
             <option value="fees-low">Fees (Low to High)</option>
@@ -123,21 +139,25 @@ function AllScholarships() {
           </select>
         </div>
 
+        {/* Scholarships Grid */}
         {filteredScholarships.length === 0 ? (
           <div className="text-center text-gray-500">No scholarships found.</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredScholarships.map((scholarship) => (
-              <ScholarshipCard key={scholarship._id} scholarship={scholarship} />
+              <ScholarshipCard
+                key={scholarship._id}
+                scholarship={scholarship}
+              />
             ))}
           </div>
         )}
 
         {/* Pagination */}
-        <div className="flex justify-center items-center gap-2 mt-10">
+        <div className="flex justify-center items-center gap-2 mt-10 flex-wrap">
           <button
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-            className="px-4 py-2 bg-rose-700 rounded-md disabled:opacity-50"
+            className="px-4 py-2 bg-rose-700 text-white rounded-md disabled:opacity-50"
             disabled={page === 1}
           >
             Prev
@@ -147,8 +167,11 @@ function AllScholarships() {
             <button
               key={idx}
               onClick={() => setPage(idx + 1)}
-              className={`px-3 py-1 rounded-md ${page === idx + 1 ? "bg-blue-600 text-white" : "bg-gray-400"
-                }`}
+              className={`px-3 py-1 rounded-md ${
+                page === idx + 1
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-400 text-black"
+              }`}
             >
               {idx + 1}
             </button>
@@ -156,7 +179,7 @@ function AllScholarships() {
 
           <button
             onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-            className="px-4 py-2 bg-rose-700 rounded-md disabled:opacity-50"
+            className="px-4 py-2 bg-rose-700 text-white rounded-md disabled:opacity-50"
             disabled={page === totalPages}
           >
             Next

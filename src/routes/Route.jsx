@@ -22,6 +22,7 @@ import ManageUsers from '../pages/Dashboard/Moderator/ManageUsers';
 import AdminOrModeratorRoute from '../components/routes/AdminOrModeratorRoute';
 import ModeratorRoute from '../components/routes/ModeratorRoute';
 import ForbiddenAccess from '../components/ForbiddenAccess';
+import NotFound from '../pages/NotFound/NotFound'
 
 export const router = createBrowserRouter([
   {
@@ -158,5 +159,10 @@ export const router = createBrowserRouter([
         Component: ForbiddenAccess,
       },
     ],
+    
   },
+  {
+    path: '*',
+    Component: NotFound,
+  }
 ]);

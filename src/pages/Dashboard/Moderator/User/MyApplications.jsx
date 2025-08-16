@@ -72,7 +72,7 @@ const MyApplications = () => {
         );
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-gray-900 p-6">
+        <div className="min-h-screen bg-sky-50 to-gray-900 p-6">
             <div className="max-w-7xl mx-auto space-y-8">
                 {/* Header Section */}
                 <div className="text-center space-y-4">
@@ -90,26 +90,26 @@ const MyApplications = () => {
                             />
                         </svg>
                     </div>
-                    <h1 className="text-4xl font-bold text-white">My Applications</h1>
-                    <p className="text-lg text-gray-200 max-w-2xl mx-auto">
+                    <h1 className="text-4xl font-bold text-black">My Applications</h1>
+                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                         Track and manage all your scholarship applications in one place.
                         Monitor status updates and take actions as needed.
                     </p>
                     <div className="flex items-center justify-center space-x-6 text-sm text-gray-500">
                         <div className="flex items-center">
                             <div className="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
-                            <span className="text-gray-300">Total: {applications.length}</span>
+                            <span className="text-gray-600">Total: {applications.length}</span>
                         </div>
                         <div className="flex items-center">
                             <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-                            <span className="text-gray-300">
+                            <span className="text-gray-600">
                                 Pending:{" "}
                                 {applications.filter((app) => app.status === "Pending").length}
                             </span>
                         </div>
                         <div className="flex items-center">
                             <div className="w-3 h-3  bg-green-500 rounded-full mr-2"></div>
-                            <span className="text-gray-300">
+                            <span className="text-gray-600">
                                 Completed:{" "}
                                 {
                                     applications.filter((app) => app.status === "Completed")

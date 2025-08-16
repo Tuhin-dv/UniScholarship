@@ -47,10 +47,9 @@ const Navbar = () => {
           to="/"
           onClick={() => setMenuOpen(false)}
           className={({ isActive }) =>
-            `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
-              isActive
-                ? "border-b-4 border-sky-500 text-sky-700 "
-                : "text-gray-700 hover:text-purple-600 hover:bg-purple-50"
+            `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${isActive
+              ? "border-l-4 bg-sky-200 border-sky-400 text-black"
+              : "text-gray-700 hover:text-sky-600 "
             }`
           }
         >
@@ -62,10 +61,9 @@ const Navbar = () => {
           to="/all-scholarships"
           onClick={() => setMenuOpen(false)}
           className={({ isActive }) =>
-            `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
-              isActive
-                ? "border-b-4 border-sky-500 text-sky-700 "
-                : "text-gray-700 hover:text-purple-600 hover:bg-purple-50"
+            `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${isActive
+              ? "border-l-4 bg-sky-200 border-sky-400 text-black"
+              : "text-gray-700 hover:text-sky-600 "
             }`
           }
         >
@@ -77,10 +75,9 @@ const Navbar = () => {
           to="/dashboard"
           onClick={() => setMenuOpen(false)}
           className={({ isActive }) =>
-            `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
-              isActive
-                ? "border-b-4 border-sky-500 text-sky-700 "
-                : "text-gray-700 hover:text-purple-600 hover:bg-purple-50"
+            `relative px-4 py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${isActive
+              ? "border-l-4 bg-sky-200 border-sky-400 text-black"
+              : "text-gray-700 hover:text-sky-600 "
             }`
           }
         >
@@ -92,10 +89,9 @@ const Navbar = () => {
           <NavLink
             to="/login"
             onClick={() => setMenuOpen(false)}
-            className="relative px-6 py-3 border border-purple-700  text-purple-600 font-bold rounded-xl shadow-lg  transform  overflow-hidden group"
+            className="relative px-6 py-3 border border-purple-700  text-purple-600 font-bold rounded-xl shadow-lg transform overflow-hidden group"
           >
             <span className="relative z-10">Login</span>
-           
           </NavLink>
         </li>
       )}
@@ -103,7 +99,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="sticky overflow-visible  top-0 z-50 bg-orange-50 backdrop-blur-lg border-b border-gray-200 shadow-lg">
+    <nav className="sticky top-0 z-50 bg-orange-50 backdrop-blur-lg border-b border-gray-200 shadow-lg">
       <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -170,11 +166,10 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-          menuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-        }`}
+        className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${menuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+          } z-50 relative`}   // ✅ Menu er z-index beshi
       >
-        <div className="bg-white border-t border-gray-200 shadow-lg">
+        <div className="bg-white border-t border-gray-200 shadow-lg relative z-50">
           <div className="px-4 py-6 space-y-4">
             {user && (
               <button
@@ -184,7 +179,7 @@ const Navbar = () => {
                 }}
                 className="flex items-center space-x-4 w-full p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl border border-purple-100 hover:from-purple-100 hover:to-blue-100 transition-all duration-300"
               >
-                <div className="w-12 h-12  rounded-full flex items-center justify-center text-white font-bold shadow-lg bg-gradient-to-r from-purple-600 to-blue-600">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold shadow-lg bg-gradient-to-r from-purple-600 to-blue-600">
                   {user.displayName?.charAt(0) ||
                     user.email?.charAt(0) ||
                     "U"}
@@ -205,18 +200,23 @@ const Navbar = () => {
       {/* Overlay */}
       {menuOpen && (
         <div
-          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/20 z-40 lg:hidden"
           onClick={() => setMenuOpen(false)}
         />
       )}
 
+
       {/* User Modal */}
       {userModalOpen && (
-        <div className="fixed inset-0 z-[60] flex mt-[350px] items-center justify-center p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+          {/* Dark Overlay */}
           <div
-            className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden transition-all duration-300"
-            onClick={(e) => e.stopPropagation()}
-          >
+            className="absolute inset-0 bg-black/30"
+            onClick={() => setUserModalOpen(false)}
+          />
+
+          {/* Modal Box */}
+          <div className="relative bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden transition-all duration-300">
             <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-6 text-white relative">
               <button
                 onClick={() => setUserModalOpen(false)}
@@ -281,9 +281,7 @@ const Navbar = () => {
                   Close
                 </button>
                 <button
-                  onClick={() => {
-                    setUserModalOpen(false);
-                  }}
+                  onClick={() => setUserModalOpen(false)}
                   className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300"
                 >
                   Edit Profile
@@ -293,7 +291,7 @@ const Navbar = () => {
                     setUserModalOpen(false);
                     handleLogout();
                   }}
-                  className="w-full  px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300"
                 >
                   Logout
                 </button>
