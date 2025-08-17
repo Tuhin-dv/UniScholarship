@@ -108,11 +108,11 @@ const BannerSlider = () => {
                   <div className="space-y-6">
                     <div className="space-y-2">
                       <p className="text-orange-300 text-lg font-semibold tracking-wider uppercase">{slide.subtitle}</p>
-                      <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tight">
+                      <h1 className="text-5xl primary-font md:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tight">
                         {slide.title}
                       </h1>
                     </div>
-                    <p className="text-slate-200 text-xl leading-relaxed max-w-xl font-light">{slide.description}</p>
+                    <p className="text-slate-200 secondary-font text-xl leading-relaxed max-w-xl font-light">{slide.description}</p>
                   </div>
 
                   {/* CTA Section */}

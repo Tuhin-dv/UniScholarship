@@ -14,3 +14,11 @@ a.active:hover {
   color: #b91c1c; /* darker red on hover */
   border-color: #b91c1c;
 }
+.primary-font {
+font-family: 'Poppins', sans-serif;
+
+}
+.secondary-font {
+  font-family: 'Roboto', sans-serif;
+
+}

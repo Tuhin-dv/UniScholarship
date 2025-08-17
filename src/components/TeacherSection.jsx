@@ -48,10 +48,10 @@ const TeacherSection = () => {
   return (
     <section className="max-w-[1740px] mx-auto py-16 px-4">
       <div className="text-center mb-12">
-        <h2 className="text-2xl md:text-4xl font-bold text-black mb-2">
+        <h2 className="text-2xl md:text-5xl primary-font font-bold text-black mb-2">
           Meet Our Expert Teachers
         </h2>
-        <p className="text-black/70 max-w-xl mx-auto">
+        <p className="text-black/70 text-xl mt-2 max-w-xl mx-auto">
           Learn from experienced educators who are passionate about helping you succeed.
         </p>
       </div>

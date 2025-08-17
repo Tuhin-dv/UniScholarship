@@ -6,6 +6,7 @@ import Testimonials from "../../components/testimonials";
 import HowItWorks from "../../components/HowItWorks";
 import TeacherSection from "../../components/TeacherSection";
 import useTopScholarships from "../../hooks/useTopScholarships";
+import Newsletter from "../../components/Newsletter";
 
 function Home() {
   const { topScholarships, isLoading } = useTopScholarships();
@@ -13,7 +14,7 @@ function Home() {
   return (
     <>
       <div>
-        <div className="min-h-screen  relative overflow-hidden">
+        <div className="min-h-screen bg-sky-50 relative overflow-hidden">
           {/* Banner Section */}
           <div className="relative">
             <BannerSlider />
@@ -51,7 +52,7 @@ function Home() {
 
                 <div>
                   <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-                    <span className="text-sky-500">Top Scholarships</span>
+                    <span className="text-sky-500 primary-font">Top Scholarships</span>
                   </h2>
                   <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                     Discover the most affordable and prestigious scholarship
@@ -108,7 +109,7 @@ function Home() {
                       <div key={idx}>
                         <div className="relative">
                           <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 rounded-3xl blur-xl -z-10 transform scale-110"></div>
-                          <div className="bg-white/90 backdrop-blur-sm rounded-3xl border border-white/50 shadow-xl hover:shadow-2xl transition-all duration-500">
+                          <div className="bg-white/90 backdrop-blur-sm rounded-3xl border border-white/50 shadow-xl  transition-all duration-500">
                             <ScholarshipCard scholarship={item} />
                           </div>
                         </div>
@@ -120,7 +121,7 @@ function Home() {
                   <div className="text-center pt-16">
                     <div className="border-sky-500 border-b-8 border-l-8 bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700 relative rounded-3xl p-8 md:p-12 shadow-2xl">
                       <div className="max-w-3xl mx-auto text-white">
-                        <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                        <h3 className="text-3xl md:text-4xl primary-font font-bold mb-4">
                           Ready to Start Your Journey?
                         </h3>
                         <p className="text-xl text-gray-100 mb-8 leading-relaxed">
@@ -159,6 +160,7 @@ function Home() {
 
         <HowItWorks />
         <Testimonials />
+        <Newsletter></Newsletter>
       </div>
     </>
   );

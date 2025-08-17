@@ -80,7 +80,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-orange-50 py-20 px-4 overflow-hidden">
+    <section className=" bg-orange-50 py-20 px-4 overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
