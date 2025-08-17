@@ -38,7 +38,7 @@ export default function Newsletter() {
           </div>
 
           {/* Heading */}
-          <h2 className="mb-4 text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl xl:text-5xl">
+          <h2 className="mb-4 text-2xl primary-font font-bold tracking-tight sm:text-3xl lg:text-4xl xl:text-5xl">
             Stay Ahead in Your
             <span className="block bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
               Scholarship Journey

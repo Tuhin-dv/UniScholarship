@@ -1,82 +1,76 @@
-
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, ArrowRight, Star, Users, Award, Play, Pause } from "lucide-react"
 import img1 from '../assets/Rectangle (3).svg'
 import img2 from '../assets/Rectangle (4).svg'
 import img3 from '../assets/sss.svg'
+
 const BannerSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
 
- const slides = [
-  {
-    id: 1,
-    title: "Find Your Dream Scholarship",
-    subtitle: "Education Made Affordable",
-    description:
-      "Discover thousands of scholarship opportunities tailored to your academic profile. Start your journey towards higher education without financial barriers.",
-    buttonText: "Get Started",
-    stats: "10,000+ Students Helped",
-    bgGradient: "bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700", // ✨ Smooth and academic
-    illustration: img1,
-  },
-  {
-    id: 2,
-    title: "Global Study Opportunities",
-    subtitle: "Study Abroad Programs",
-    description:
-      "Explore international scholarship programs from top universities worldwide. Transform your future with world-class education and cultural experiences.",
-    buttonText: "Explore Now",
-    stats: "50+ Countries Available",
-  bgGradient: "bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700", // ✨ Elegant and global
-    illustration: img2,
-  },
-  {
-    id: 3,
-    title: "Success Stories Await",
-    subtitle: "Join Our Community",
-    description:
-      "Be part of thousands of successful scholarship recipients who achieved their dreams. Your success story starts here with the right guidance and support.",
-    buttonText: "Join Now",
-    stats: "95% Success Rate",
-    bgGradient: "bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700", // ✨ Inspirational and warm
-    illustration: img3,
-  },
-];
-
+  const slides = [
+    {
+      id: 1,
+      title: "Find Your Dream Scholarship",
+      subtitle: "Education Made Affordable",
+      description:
+        "Discover thousands of scholarship opportunities tailored to your academic profile. Start your journey towards higher education without financial barriers.",
+      buttonText: "Get Started",
+      stats: "10,000+ Students Helped",
+      bgGradient: "bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700",
+      illustration: img1,
+    },
+    {
+      id: 2,
+      title: "Global Study Opportunities",
+      subtitle: "Study Abroad Programs",
+      description:
+        "Explore international scholarship programs from top universities worldwide. Transform your future with world-class education and cultural experiences.",
+      buttonText: "Explore Now",
+      stats: "50+ Countries Available",
+      bgGradient: "bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700",
+      illustration: img2,
+    },
+    {
+      id: 3,
+      title: "Success Stories Await",
+      subtitle: "Join Our Community",
+      description:
+        "Be part of thousands of successful scholarship recipients who achieved their dreams. Your success story starts here with the right guidance and support.",
+      buttonText: "Join Now",
+      stats: "95% Success Rate",
+      bgGradient: "bg-gradient-to-br from-sky-500 via-sky-700 to-blue-700",
+      illustration: img3,
+    },
+  ];
 
   // Auto-slide functionality
   useEffect(() => {
     if (!isPlaying) return
-
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, 5000)
-
     return () => clearInterval(interval)
   }, [slides.length, isPlaying])
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length)
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+  const goToSlide = (index) => setCurrentSlide(index)
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }
-
- const goToSlide = (index) => {
-  setCurrentSlide(index)
-}
   return (
     <div className="relative w-full min-h-screen lg:h-[700px] overflow-hidden bg-white shadow-2xl">
-      
+
       {/* Slides Container */}
       <div
         className="flex transition-transform duration-1000 ease-out h-full"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
-        {slides.map((slide, index) => (
+        {slides.map((slide) => (
           <div key={slide.id} className={`min-w-full h-full bg-gradient-to-br ${slide.bgGradient} relative`}>
+            
+            {/* BG Image */}
+            <div className="absolute inset-0 bg-[url('/bannerBgImg.jpg')] bg-cover bg-center opacity-10"></div>
+
             {/* Geometric Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
@@ -149,10 +143,7 @@ const BannerSlider = () => {
                   <div className="relative">
                     {/* Main Illustration Container */}
                     <div className="relative w-full max-w-2xl">
-                      {/* Decorative Frame */}
                       <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 rounded-3xl backdrop-blur-sm border border-white/20 shadow-2xl"></div>
-
-                      {/* Image Container */}
                       <div className="relative p-8">
                         <img
                           src={slide.illustration || "/placeholder.svg"}
@@ -162,7 +153,6 @@ const BannerSlider = () => {
                       </div>
                     </div>
 
-                  
                     {/* Additional Decorative Elements */}
                     <div
                       className="absolute top-3/4 -left-4 w-12 h-12 bg-gradient-to-br from-green-400 to-teal-500 rounded-2xl flex items-center justify-center animate-bounce shadow-xl border border-green-300/20"
@@ -178,7 +168,7 @@ const BannerSlider = () => {
         ))}
       </div>
 
-      {/* Enhanced Navigation Controls */}
+      {/* Controls */}
       <div className="absolute top-6 right-6 flex items-center gap-3">
         <button
           onClick={() => setIsPlaying(!isPlaying)}
@@ -206,16 +196,15 @@ const BannerSlider = () => {
         <ChevronRight className="w-7 h-7 text-white group-hover:scale-110 transition-transform duration-300" />
       </button>
 
-      {/* Enhanced Dots Indicator */}
+      {/* Dots */}
       <div className="absolute bottom-10 left-1/2  transform -translate-x-1/2 flex items-center gap-3 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20 shadow-xl">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`transition-all duration-300 ${
-              index === currentSlide
-                ? "w-8 h-2 bg-sky-300 rounded-full shadow-lg"
-                : "w-2 h-2 bg-white/50 hover:bg-white/75 rounded-full hover:scale-125"
+            className={`transition-all duration-300 ${index === currentSlide
+              ? "w-8 h-2 bg-sky-300 rounded-full shadow-lg"
+              : "w-2 h-2 bg-white/50 hover:bg-white/75 rounded-full hover:scale-125"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
@@ -225,13 +214,11 @@ const BannerSlider = () => {
         </div>
       </div>
 
-      {/* Enhanced Progress Bar */}
+      {/* Progress Bar */}
       <div className="absolute bottom-0 left-0 w-full h-1 bg-white/10">
         <div
           className="h-full bg-gradient-to-r from-sky-400 to-sky-200 transition-all duration-1000 ease-linear shadow-lg"
-          style={{
-            width: `${((currentSlide + 1) / slides.length) * 100}%`,
-          }}
+          style={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
         />
       </div>
     </div>

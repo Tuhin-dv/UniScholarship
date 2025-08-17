@@ -37,7 +37,7 @@ const teachers = [
     name: "Tuhin Ahmed",
     subject: "French Language",
     university: "University of Paris",
-    image: "https://i.ibb.co/1GdYp7GL/christian-buehner-DIt-Ylc26z-VI-unsplash.jpg",
+    image: "https://i.ibb.co.com/1Y3cJbhL/usman-yousaf-GFOlzp-Lui-Cg-unsplash.jpg",
     rating: 4.7,
     verified: true,
     bio: "Specialized in beginner to intermediate French learning with cultural context.",

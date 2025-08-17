@@ -80,34 +80,19 @@ const Testimonials = () => {
   };
 
   return (
-    <section className=" bg-orange-50 py-20 px-4 overflow-hidden">
+    <section className="  py-20 px-4 overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse animation-delay-1000"></div>
         <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-pink-500/10 rounded-full blur-2xl animate-bounce animation-delay-2000"></div>
       </div>
-
-      {/* Floating Particles */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute w-2 h-2 bg-purple-400 rounded-full animate-float-${(i % 3) + 1}`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`,
-            }}
-          ></div>
-        ))}
-      </div>
+     
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
         <div className="text-center mb-20">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mb-8 shadow-2xl">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-sky-500 to-sky-800 rounded-full mb-8 shadow-2xl">
             <svg
               className="w-10 h-10 text-white"
               fill="currentColor"
@@ -121,7 +106,7 @@ const Testimonials = () => {
             </svg>
           </div>
 
-          <h2 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
+          <h2 className="text-6xl md:text-7xl primary-font font-bold mb-6 leading-tight">
             <span className=" text-black  animate-gradient">
               What Our Students Say!
             </span>
@@ -202,7 +187,7 @@ const Testimonials = () => {
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-6 z-20">
             <button
               onClick={prevSlide}
-              className="group w-14 h-14 bg-gradient-to-br from-sky-500 to-sky-700  rounded-full shadow-xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
+              className="group w-14 h-14 bg-gradient-to-br from-sky-500 to-sky-700  rounded-full shadow-xl hover:shadow-sky-400/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
             >
               <svg
                 className="w-6 h-6 text-white group-hover:scale-125 transition-transform duration-300"
@@ -216,7 +201,7 @@ const Testimonials = () => {
 
             <button
               onClick={nextSlide}
-              className="group w-14 h-14 bg-gradient-to-br from-sky-700 to-sky-500 rounded-full shadow-xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
+              className="group w-14 h-14 bg-gradient-to-br from-sky-700 to-sky-500 rounded-full shadow-xl hover:shadow-sky-400/50 transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
             >
               <svg
                 className="w-6 h-6 text-white group-hover:scale-125 transition-transform duration-300"

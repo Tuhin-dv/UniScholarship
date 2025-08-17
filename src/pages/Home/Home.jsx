@@ -7,6 +7,7 @@ import HowItWorks from "../../components/HowItWorks";
 import TeacherSection from "../../components/TeacherSection";
 import useTopScholarships from "../../hooks/useTopScholarships";
 import Newsletter from "../../components/Newsletter";
+import AboutUs from "../../components/AboutUs";
 
 function Home() {
   const { topScholarships, isLoading } = useTopScholarships();
@@ -18,6 +19,7 @@ function Home() {
           {/* Banner Section */}
           <div className="relative">
             <BannerSlider />
+            <AboutUs></AboutUs>
             {/* Decorative Elements */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
               <div className="absolute top-20 left-10 w-32 h-32 bg-purple-300/20 rounded-full blur-3xl"></div>
@@ -30,7 +32,7 @@ function Home() {
           <section className="relative py-20 px-4">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 transform -skew-y-1"></div>
+              <div className=" bg-gradient-to-r from-purple-600 to-blue-600 transform "></div>
             </div>
 
             <div className="max-w-[1700px] mx-auto relative z-10">
