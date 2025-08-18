@@ -5,6 +5,7 @@ import { AuthContext } from "../context/AuthContext/AuthContext";
 
 const useUserRole = () => {
   const { user } = useContext(AuthContext);
+  console.log('from frontend',user)
   const axiosSecure = useAxios();
 
   const { data, isLoading } = useQuery({
@@ -13,6 +14,7 @@ const useUserRole = () => {
     queryFn: async () => {
       const res = await axiosSecure.get(`/users?email=${user.email}`);
       return res.data?.role || "user"; // directly access role from response data
+     
     },
   });
 

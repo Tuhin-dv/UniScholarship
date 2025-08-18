@@ -136,6 +136,7 @@ const DashboardLayout = () => {
 
   const { user, logout } = useContext(AuthContext);
   const { role, roleLoading } = useUserRole();
+   console.log(role);
   const navigate = useNavigate();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
