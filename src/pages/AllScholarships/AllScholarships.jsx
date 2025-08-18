@@ -13,6 +13,7 @@ function AllScholarships() {
   const [sortBy, setSortBy] = useState("name");
   const [page, setPage] = useState(1);
 
+  // ✅ Fetch scholarships using AxiosSecure
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["scholarships", page],
     queryFn: async () => {
@@ -28,6 +29,7 @@ function AllScholarships() {
   const total = data?.total || 0;
   const totalPages = Math.ceil(total / limit);
 
+  // Filter & Sorting
   const filteredScholarships = useMemo(() => {
     let filtered = [...scholarships];
 
@@ -95,6 +97,7 @@ function AllScholarships() {
       </div>
     );
   }
+
   if (isError)
     return <p className="text-red-500 text-center mt-12">{error.message}</p>;
 
@@ -103,7 +106,6 @@ function AllScholarships() {
       <div className="max-w-[1700px] mx-auto">
         {/* Filters */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 bg-white p-4 rounded-2xl shadow-md gap-4 mb-8">
-          {/* Search */}
           <input
             type="text"
             placeholder="Search by university or category..."
@@ -112,7 +114,6 @@ function AllScholarships() {
             className="border rounded-xl px-4 py-2 text-black bg-white focus:border-purple-500 w-full"
           />
 
-          {/* Category */}
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
@@ -126,7 +127,6 @@ function AllScholarships() {
             ))}
           </select>
 
-          {/* Sorting */}
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}

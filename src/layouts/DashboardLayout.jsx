@@ -87,7 +87,7 @@ const menuItems = [
     ],
   },
 
-  // ✅ Admin specific routes
+  //  Admin specific routes
   {
     roles: ["admin"],
     items: [
@@ -139,7 +139,7 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-
+console.log(role)
   if (roleLoading)
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 p-6 flex items-center justify-center">

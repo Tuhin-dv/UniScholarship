@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "https://uni-scholar-server.vercel.app/",
+  baseURL: "http://localhost:5000/",
   withCredentials: true, // 🔥 This is IMPORTANT!
 });
 
